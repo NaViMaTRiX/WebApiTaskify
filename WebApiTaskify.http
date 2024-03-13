@@ -1,0 +1,6 @@
+@WebApiTaskify_HostAddress = http://localhost:5031
+
+GET {{WebApiTaskify_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
