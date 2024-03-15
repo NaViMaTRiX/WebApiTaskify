@@ -1,6 +1,6 @@
-﻿namespace WebApiTaskify.Models;
+﻿namespace WebApiTaskify.Dtos.Board;
 
-public class Boards
+public class BoardDto
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public string OrgId { get; set; } = string.Empty;
@@ -12,6 +12,4 @@ public class Boards
     public string ImageLinkHtml { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
-    
-    public List<Lists> Lists { get; set; } = new List<Lists>();
 }

@@ -1,17 +1,25 @@
-﻿namespace WebApiTaskify.Models;
+﻿namespace WebApiTaskify.Dtos.Board;
 
-public class Boards
+using System.ComponentModel.DataAnnotations;
+
+public class CreateBoardDto
 {
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    [Required]
     public string OrgId { get; set; } = string.Empty;
+    [Required]
     public string Title { get; set; } = string.Empty;
+    [Required]
     public string ImageId { get; set; } = string.Empty;
-    public string ImageThumbUrl { get; set; } = string.Empty;
+    [Required]
     public string ImageFullUrl { get; set; } = string.Empty;
+    [Required]
+    public string ImageThumbUrl { get; set; } = string.Empty;
+    [Required]
     public string ImageUserName { get; set; } = string.Empty;
+    [Required]
     public string ImageLinkHtml { get; set; } = string.Empty;
+    [Required]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    [Required]
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
-    
-    public List<Lists> Lists { get; set; } = new List<Lists>();
 }

@@ -13,7 +13,7 @@ enum ENTITY_TYPE {
     CARD
 }*/
 
-public class AuditLog
+public class AuditLogs
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public string OrgId { get; set; } = string.Empty;
