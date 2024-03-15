@@ -19,7 +19,7 @@ public class BoardRepository : IBoardRepository
         return await _context.Boards.ToListAsync();
     }
 
-    public async Task<Boards?> GetByIdAsync(string id)
+    public async Task<Boards?> GetByIdAsync(Guid id)
     {
         return await _context.Boards.FindAsync(id);
     }
@@ -31,7 +31,7 @@ public class BoardRepository : IBoardRepository
         return boardsModel;
     }
 
-    public async Task<Boards?> UpdateAsync(string id, Boards boardsModel)
+    public async Task<Boards?> UpdateAsync(Guid id, Boards boardsModel)
     {
         var board = await _context.Boards.FindAsync(id);
         
@@ -51,7 +51,7 @@ public class BoardRepository : IBoardRepository
         return board;
     }
 
-    public async Task<Boards?> DeleteAsync(string id)
+    public async Task<Boards?> DeleteAsync(Guid id)
     {
         var board = await _context.Boards.FindAsync(id);
         
@@ -63,7 +63,7 @@ public class BoardRepository : IBoardRepository
         return board;
     }
 
-    public Task<bool> ExistAsync(string id)
+    public Task<bool> ExistAsync(Guid id)
     {
         return _context.Boards.AnyAsync(x => x.Id == id);
     }

@@ -22,7 +22,7 @@ public static class BoardMappers
         };
     }
 
-    public static Boards ToBoardFromCreate(this CreateBoardDto createBoardModel, string orgId) // изпользуется для получения данных из формы
+    public static Boards ToBoardFromCreate(this CreateBoardDto createBoardModel, Guid orgId) // изпользуется для получения данных из формы
     {
         return new Boards
         {

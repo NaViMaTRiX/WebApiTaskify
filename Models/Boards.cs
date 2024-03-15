@@ -2,8 +2,8 @@
 
 public class Boards
 {
-    public string Id { get; set; } = Guid.NewGuid().ToString();
-    public string OrgId { get; set; } = string.Empty;
+    public Guid Id { get; set; } = Guid.NewGuid();
+    public Guid OrgId { get; set; } = Guid.NewGuid();
     public string Title { get; set; } = string.Empty;
     public string ImageId { get; set; } = string.Empty;
     public string ImageThumbUrl { get; set; } = string.Empty;

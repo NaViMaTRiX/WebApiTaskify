@@ -2,7 +2,7 @@
 
 public class OrgSubscriptions
 {
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    public Guid Id { get; set; } = Guid.NewGuid();
     public string OrgId { get; set; } = string.Empty;
     public string StripeCustomerId { get; set; } = string.Empty;
     public string StripeSubscriptionId { get; set; } = string.Empty;

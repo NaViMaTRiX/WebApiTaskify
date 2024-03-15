@@ -1,6 +1,5 @@
 ﻿namespace WebApiTaskify.Controllers;
 
-using Asp.Versioning;
 using Dtos.Board;
 using Interface;
 using Mappers;
@@ -29,7 +28,7 @@ public class BoardController : ControllerBase
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<IActionResult> GetById([FromRoute] string id)
+    public async Task<IActionResult> GetById([FromRoute] Guid id)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -42,7 +41,7 @@ public class BoardController : ControllerBase
     }
 
     [HttpPost("{id:guid}")]
-    public async Task<IActionResult> Create([FromRoute] string orgId, [FromBody] CreateBoardDto boardDto)
+    public async Task<IActionResult> Create([FromRoute] Guid orgId, [FromBody] CreateBoardDto boardDto)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -55,7 +54,7 @@ public class BoardController : ControllerBase
     }
 
     [HttpPut("{id:guid}")]
-    public async Task<IActionResult> Update([FromRoute] string id, [FromBody] UpdateBoardDto boardDto)
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateBoardDto boardDto)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -69,7 +68,7 @@ public class BoardController : ControllerBase
     }
 
     [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> Delete([FromRoute] string id)
+    public async Task<IActionResult> Delete([FromRoute] Guid id)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);

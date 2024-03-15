@@ -15,7 +15,7 @@ enum ENTITY_TYPE {
 
 public class AuditLogs
 {
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    public Guid Id { get; set; } = Guid.NewGuid();
     public string OrgId { get; set; } = string.Empty;
     public string Action { get; set; } = String.Empty; //TODO: enum CREATE, UPDATE, DELETE
     public string EntityId { get; set; } = String.Empty;
