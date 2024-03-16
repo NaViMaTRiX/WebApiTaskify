@@ -1,6 +1,7 @@
 ﻿namespace WebApiTaskify.Controllers;
 
 using Dtos.List;
+using Interface;
 using Mappers;
 using Microsoft.AspNetCore.Mvc;
 using Repository;
@@ -9,11 +10,13 @@ using Repository;
 [ApiController]
 public class ListController : ControllerBase
 {
-    private readonly ListRepository _repository;
+    private readonly IListRepository _listRepository;
+    private readonly IBoardRepository _boardRepository;
 
-    public ListController(ListRepository repository)
+    public ListController(IListRepository listRepository, IBoardRepository boardRepository)
     {
-        _repository = repository;
+        _listRepository = listRepository;
+        _boardRepository = boardRepository;
     }
 
     [HttpGet]
@@ -22,7 +25,7 @@ public class ListController : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var lists = await _repository.GetAllAsync();
+        var lists = await _listRepository.GetAllAsync(); 
         var result = lists.Select(x => x.ToListDto());
         return Ok(result);
     }
@@ -33,12 +36,11 @@ public class ListController : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var list = await _repository.GetByIdAsync(id);
-        if (list == null)
+        var list = await _listRepository.GetByIdAsync(id);
+        if (list is null)
             return NotFound();
 
-        var result = list.ToListDto();
-        return Ok(result);
+        return Ok(list.ToListDto());
     }
 
     [HttpPost]
@@ -47,39 +49,44 @@ public class ListController : ControllerBase
          if (!ModelState.IsValid)
              return BadRequest(ModelState);
 
+         if (!await _boardRepository.ExistAsync(boardId))
+         {
+             return BadRequest(ModelState);
+         }
+
          var listModel = createListDto.ToCreateListDto();
-         await _repository.CreateAsync(boardId, listModel);
+         await _listRepository.CreateAsync(boardId, listModel);
          return CreatedAtAction(nameof(GetById), new { id = listModel.Id }, listModel.ToListDto());
     }
 
-    [HttpPut()]
+    [HttpPut]
     public async Task<IActionResult> Update(Guid id, [FromBody] UpdateListDto updateListDto)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         
-        var checkList = await _repository.GetByIdAsync(id);
+        var checkList = await _listRepository.GetByIdAsync(id);
         
         if (checkList is null)
             return NotFound("List not found");
         
-        await _repository.UpdateAsync(id, updateListDto.ToUpdateListDto());
+        await _listRepository.UpdateAsync(id, updateListDto.ToUpdateListDto());
 
         return Ok(checkList.ToListDto());
     }
 
-    [HttpDelete()]
+    [HttpDelete]
     public async Task<IActionResult> Delete(Guid id)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         
-        var checkList = await _repository.GetByIdAsync(id);
+        var checkList = await _listRepository.GetByIdAsync(id);
         
         if (checkList is null)
             return NotFound("List not found");
         
-        await _repository.DeleteAsync(id);
+        await _listRepository.DeleteAsync(id);
         return Ok(checkList.ToListDto());
     }
     

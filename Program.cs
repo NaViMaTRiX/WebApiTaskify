@@ -29,6 +29,7 @@ builder.Services.AddDbContext<AppDBContext>(options =>
 });
 
 builder.Services.AddScoped<IBoardRepository, BoardRepository>();
+builder.Services.AddScoped<IListRepository, ListRepository>();
 
 var app = builder.Build();
 
