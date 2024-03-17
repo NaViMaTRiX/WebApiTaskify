@@ -1,16 +1,19 @@
 ﻿namespace WebApiTaskify.Controllers;
 
 using Dtos.Card;
+using Interface;
 using Mappers;
 using Microsoft.AspNetCore.Mvc;
 using Repository;
 
+[ApiController]
+[Route("api/v{version:apiVersion}/card")]
 public class CardController : ControllerBase
 {
-    private readonly CardRepository _cardRepository;
-    private readonly ListRepository _listRepository;
+    private readonly ICardRepository _cardRepository;
+    private readonly IListRepository _listRepository;
 
-    public CardController(CardRepository cardRepository, ListRepository listRepository)
+    public CardController(ICardRepository cardRepository, IListRepository listRepository)
     {
         _cardRepository = cardRepository;
         _listRepository = listRepository;
