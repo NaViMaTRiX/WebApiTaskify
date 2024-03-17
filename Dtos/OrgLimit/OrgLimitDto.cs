@@ -1,6 +1,6 @@
-﻿namespace WebApiTaskify.Models;
+﻿namespace WebApiTaskify.Dtos.OrgLimit;
 
-public class OrgLimits
+public class OrgLimitDto
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public Guid OrgId { get; set; } = Guid.Empty;

@@ -4,7 +4,6 @@ using Dtos.List;
 using Interface;
 using Mappers;
 using Microsoft.AspNetCore.Mvc;
-using Repository;
 
 [Route("api/v{version:apiVersion}/list")]
 [ApiController]
