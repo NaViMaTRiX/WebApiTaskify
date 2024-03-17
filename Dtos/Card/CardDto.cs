@@ -1,5 +1,7 @@
 ﻿namespace WebApiTaskify.Dtos.Card;
 
+using Models;
+
 public class CardDto
 {
     public Guid Id { get; set; } = Guid.NewGuid();
@@ -9,4 +11,5 @@ public class CardDto
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow; // Возможно now будет создавать неволадки. Надо тестить.
     public bool isChecked { get; set; } = false;
+    public Guid ListId { get; set; }
 }

@@ -5,9 +5,9 @@ using Models;
 
 public static class CardMappers
 {
-    public static Cards ToCardDto(this CardDto cardDto)
+    public static CardDto ToCardDto(this Cards cardDto)
     {
-        return new Cards
+        return new CardDto
         {
             Id = cardDto.Id,
             Title = cardDto.Title,
@@ -16,12 +16,13 @@ public static class CardMappers
             isChecked = cardDto.isChecked,
             CreatedAt = cardDto.CreatedAt,
             UpdatedAt = cardDto.UpdatedAt,
+            ListId = cardDto.ListId
         };
     }
 
-    public static CardDto ToCreateCardDto(this CreateCardDto createCardDto)
+    public static Cards ToCardFromCreate(this CreateCardDto createCardDto, Guid listId)
     {
-        return new CardDto
+        return new Cards
         {
             Title = createCardDto.Title,
             Description = createCardDto.Description,
@@ -29,12 +30,13 @@ public static class CardMappers
             CreatedAt = createCardDto.CreatedAt,
             UpdatedAt = createCardDto.UpdatedAt,
             isChecked = createCardDto.isChecked,
+            ListId = listId
         };
     }
 
-    public static CardDto ToUpdateCardDto(this UpdateCardDto updateCardDto)
+    public static Cards ToCardFromUpdate(this UpdateCardDto updateCardDto)
     {
-        return new CardDto
+        return new Cards
         {
             Title = updateCardDto.Title,
             Description = updateCardDto.Description,

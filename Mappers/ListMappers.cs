@@ -13,23 +13,25 @@ public static class ListMappers
             Title = listModel.Title,
             Order = listModel.Order,
             CreatedAt = listModel.CreatedAt,
-            UpdatedAt = listModel.UpdatedAt
+            UpdatedAt = listModel.UpdatedAt,
+            BoardId = listModel.BoardId,
         };
     }
 
     // изпользуется для ввода данных на форму
-    public static Lists ToCreateListDto(this CreateListDto createListModel) 
+    public static Lists ToListFromCreate(this CreateListDto createListModel, Guid boardId)
     {
         return new Lists
         {
             Title = createListModel.Title,
             Order = createListModel.Order,
             CreatedAt = createListModel.CreatedAt,
-            UpdatedAt = createListModel.UpdatedAt
+            UpdatedAt = createListModel.UpdatedAt,
+            BoardId = boardId,
         };
     }
 
-    public static Lists ToUpdateListDto(this UpdateListDto updateListModel)
+    public static Lists ToListFromUpdate(this UpdateListDto updateListModel)
     {
         return new Lists
         {

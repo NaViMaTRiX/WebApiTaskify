@@ -8,7 +8,7 @@ public class Lists
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
     
-    public Boards? BoardId { get; set; } = new Boards();
+    public Guid BoardId { get; set; }
     public List<Cards> Cards { get; set; } = new List<Cards>();
     
 }

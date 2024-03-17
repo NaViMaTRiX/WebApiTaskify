@@ -7,4 +7,6 @@ public class ListDto
     public int Order { get; set; } = 0;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+    public Guid BoardId { get; set; } = Guid.Empty;
+
 }

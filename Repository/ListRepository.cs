@@ -24,7 +24,7 @@ public class ListRepository : IListRepository
         return await _context.Lists.FindAsync(id);
     }
 
-    public async Task<Lists?> CreateAsync(Guid boardId, Lists listModel)
+    public async Task<Lists?> CreateAsync(Lists listModel)
     {
         await _context.Lists.AddAsync(listModel);
         await _context.SaveChangesAsync();

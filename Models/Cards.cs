@@ -9,6 +9,5 @@ public class Cards
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
     public bool isChecked { get; set; } = false;
-    
-    public Lists? ListId { get; set; }
+    public Guid ListId { get; set; }
 }

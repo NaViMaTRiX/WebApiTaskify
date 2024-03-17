@@ -54,8 +54,8 @@ public class ListController : ControllerBase
              return BadRequest(ModelState);
          }
 
-         var listModel = createListDto.ToCreateListDto();
-         await _listRepository.CreateAsync(boardId, listModel);
+         var listModel = createListDto.ToListFromCreate(boardId);
+         await _listRepository.CreateAsync(listModel);
          return CreatedAtAction(nameof(GetById), new { id = listModel.Id }, listModel.ToListDto());
     }
 
@@ -65,12 +65,10 @@ public class ListController : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         
-        var checkList = await _listRepository.GetByIdAsync(id);
+        var checkList = await _listRepository.UpdateAsync(id, updateListDto.ToListFromUpdate());
         
         if (checkList is null)
             return NotFound("List not found");
-        
-        await _listRepository.UpdateAsync(id, updateListDto.ToUpdateListDto());
 
         return Ok(checkList.ToListDto());
     }
@@ -81,12 +79,11 @@ public class ListController : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         
-        var checkList = await _listRepository.GetByIdAsync(id);
+        var checkList = await _listRepository.DeleteAsync(id);
         
         if (checkList is null)
             return NotFound("List not found");
         
-        await _listRepository.DeleteAsync(id);
         return Ok(checkList.ToListDto());
     }
     
