@@ -21,7 +21,7 @@ public class OrgLimitController : ControllerBase
         if(!ModelState.IsValid)
             return BadRequest(ModelState);
         
-        var orgLimits = await _orgLimitRepository.GetAllAsync();
+        var orgLimits = await _orgLimitRepository.GetAllAsync();                                 
         var result = orgLimits.Select(x => x.ToOrgLimitDto());
         return Ok(result);
     }
@@ -75,6 +75,7 @@ public class OrgLimitController : ControllerBase
         var result = await _orgLimitRepository.DeleteAsync(id);
         if(result is null)
             return NotFound("Organization limit not found");
-        return Ok(result.ToOrgLimitDto());
+        
+        return NoContent();
     }
 }

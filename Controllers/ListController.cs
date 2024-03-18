@@ -83,7 +83,7 @@ public class ListController : ControllerBase
         if (checkList is null)
             return NotFound("List not found");
         
-        return Ok(checkList.ToListDto());
+        return NoContent();
     }
     
 }

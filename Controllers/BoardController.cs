@@ -78,6 +78,6 @@ public class BoardController : ControllerBase
         if (boardModel is null)
             return NotFound("Board is not exist!");
         
-        return Ok(boardModel.ToBoardDto());
+        return NoContent();
     }
 }

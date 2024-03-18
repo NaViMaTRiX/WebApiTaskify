@@ -82,6 +82,6 @@ public class CardController : ControllerBase
         if (card is null)
             return NotFound("Card not found");
         
-        return Ok(card.ToCardDto());
+        return NoContent();
     }
 }
