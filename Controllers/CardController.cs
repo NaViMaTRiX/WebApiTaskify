@@ -43,7 +43,7 @@ public class CardController : ControllerBase
         return Ok(card.ToCardDto());
     }
 
-    [HttpPost]
+    [HttpPost("{listId:guid}")]
     public async Task<IActionResult> Create([FromBody] CreateCardDto createCardDto, Guid listId)
     {
         if (!ModelState.IsValid)
@@ -57,7 +57,7 @@ public class CardController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = cardModel.Id }, cardModel.ToCardDto());
     }
 
-    [HttpPut]
+    [HttpPut("{id:guid}")]
     public async Task<IActionResult> Update([FromBody] UpdateCardDto updateCardDto, Guid id)
     {
         if (!ModelState.IsValid)
@@ -71,7 +71,7 @@ public class CardController : ControllerBase
         return Ok(cardModel.ToCardDto());
     }
 
-    [HttpDelete]
+    [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Delete(Guid id)
     {
         if (!ModelState.IsValid)

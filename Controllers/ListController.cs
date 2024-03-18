@@ -42,7 +42,7 @@ public class ListController : ControllerBase
         return Ok(list.ToListDto());
     }
 
-    [HttpPost]
+    [HttpPost("{boardId:guid}")]
     public async Task<IActionResult> Create([FromRoute] Guid boardId, [FromBody] CreateListDto createListDto)
     {
          if (!ModelState.IsValid)
@@ -58,7 +58,7 @@ public class ListController : ControllerBase
          return CreatedAtAction(nameof(GetById), new { id = listModel.Id }, listModel.ToListDto());
     }
 
-    [HttpPut]
+    [HttpPut("{id:guid}")]
     public async Task<IActionResult> Update(Guid id, [FromBody] UpdateListDto updateListDto)
     {
         if (!ModelState.IsValid)
@@ -72,7 +72,7 @@ public class ListController : ControllerBase
         return Ok(checkList.ToListDto());
     }
 
-    [HttpDelete]
+    [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Delete(Guid id)
     {
         if (!ModelState.IsValid)

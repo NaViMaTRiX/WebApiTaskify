@@ -40,7 +40,7 @@ public class BoardController : ControllerBase
         return Ok(board.ToBoardDto());
     }
 
-    [HttpPost("{id:guid}")]
+    [HttpPost("{orgId:guid}")]
     public async Task<IActionResult> Create([FromRoute] Guid orgId, [FromBody] CreateBoardDto boardDto)
     {
         if (!ModelState.IsValid)

@@ -198,9 +198,8 @@ namespace WebApiTaskify.Migrations
                     b.Property<int>("Limit")
                         .HasColumnType("integer");
 
-                    b.Property<string>("OrgId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("OrgId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");

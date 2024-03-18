@@ -31,6 +31,7 @@ builder.Services.AddDbContext<AppDBContext>(options =>
 builder.Services.AddScoped<IBoardRepository, BoardRepository>();
 builder.Services.AddScoped<IListRepository, ListRepository>();
 builder.Services.AddScoped<ICardRepository, CardRepository>();
+//builder.Services.AddScoped<IOrgLimitRepository, OrgLimitRepository>();
 
 var app = builder.Build();
 

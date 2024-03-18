@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 public class OrgLimitController : ControllerBase
 {
     private readonly IOrgLimitRepository _orgLimitRepository;
-
     public OrgLimitController(IOrgLimitRepository orgLimitRepository)
     {
         _orgLimitRepository = orgLimitRepository;
@@ -27,7 +26,7 @@ public class OrgLimitController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet]
+    [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(Guid id)
     {
         if(!ModelState.IsValid)
@@ -36,12 +35,12 @@ public class OrgLimitController : ControllerBase
         var orgLimit = await _orgLimitRepository.GetByIdAsync(id);
         
         if(orgLimit is null)
-            return NotFound("Org limit not found");
+            return NotFound("Organization limit not found");
         
         return Ok(orgLimit.ToOrgLimitDto());
     }
 
-    [HttpPost]
+    [HttpPost("{id:guid}")]
     public async Task<IActionResult> Create([FromBody] CreateOrgLimitDto createOrgLimitDto, Guid orgId)
     {
         if(!ModelState.IsValid)
@@ -50,5 +49,32 @@ public class OrgLimitController : ControllerBase
         var orgLimit = createOrgLimitDto.ToCreateFromOrgLimitDto(orgId);
         await _orgLimitRepository.CreateAsync(orgLimit);
         return CreatedAtAction(nameof(GetById), new {id = orgLimit.Id}, orgLimit.ToOrgLimitDto());
+    }
+
+    [HttpPut("{id:guid}")]
+    public async Task<IActionResult> Update([FromBody] UpdateOrgLimitDto updateOrgLimitDto, Guid id)
+    {
+        if(!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var orgLimit = updateOrgLimitDto.ToCreateFromOrgLimitDto();
+        var result = await _orgLimitRepository.UpdateAsync(id, orgLimit);
+        
+        if(result is null)
+            return NotFound("Organization limit not found");
+        
+        return Ok(result.ToOrgLimitDto());
+    }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Delete([FromBody] Guid id)
+    {
+        if(!ModelState.IsValid)
+            return BadRequest(ModelState);
+        
+        var result = await _orgLimitRepository.DeleteAsync(id);
+        if(result is null)
+            return NotFound("Organization limit not found");
+        return Ok(result.ToOrgLimitDto());
     }
 }

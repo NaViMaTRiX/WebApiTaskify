@@ -5,11 +5,11 @@ using Interface;
 using Microsoft.EntityFrameworkCore;
 using Models;
 
-public class OrgLimisRepository : IOrgLimitRepository
+public class OrgLimitRepository : IOrgLimitRepository
 {
     private readonly AppDBContext _context;
 
-    public OrgLimisRepository(AppDBContext context)
+    public OrgLimitRepository(AppDBContext context)
     {
         _context = context;
     }
