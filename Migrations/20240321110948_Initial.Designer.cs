@@ -12,7 +12,7 @@ using WebApiTaskify.Data;
 namespace WebApiTaskify.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20240318063341_Initial")]
+    [Migration("20240321110948_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -38,9 +38,8 @@ namespace WebApiTaskify.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("EntityId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("EntityId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("EntityTitle")
                         .IsRequired()
@@ -103,8 +102,9 @@ namespace WebApiTaskify.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("OrgId")
-                        .HasColumnType("uuid");
+                    b.Property<string>("OrgId")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -201,8 +201,9 @@ namespace WebApiTaskify.Migrations
                     b.Property<int>("Limit")
                         .HasColumnType("integer");
 
-                    b.Property<Guid>("OrgId")
-                        .HasColumnType("uuid");
+                    b.Property<string>("OrgId")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");

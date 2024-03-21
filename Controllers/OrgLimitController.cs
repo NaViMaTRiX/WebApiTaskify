@@ -40,14 +40,17 @@ public class OrgLimitController : ControllerBase
         return Ok(orgLimit.ToOrgLimitDto());
     }
 
-    [HttpPost("{id:guid}")]
-    public async Task<IActionResult> Create([FromBody] CreateOrgLimitDto createOrgLimitDto, Guid orgId)
+    [HttpPost("{orgId}")]
+    public async Task<IActionResult> Create([FromBody] CreateOrgLimitDto createOrgLimitDto, string orgId)
     {
         if(!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var orgLimit = createOrgLimitDto.ToCreateFromOrgLimitDto(orgId);
-        await _orgLimitRepository.CreateAsync(orgLimit);
+        var orgLimitModel = createOrgLimitDto.ToCreateFromOrgLimitDto(orgId);
+        var orgLimit = await _orgLimitRepository.CreateAsync(orgLimitModel);
+        
+        if(orgLimit is null)
+            return BadRequest("Organization limit could not be created");
         return CreatedAtAction(nameof(GetById), new {id = orgLimit.Id}, orgLimit.ToOrgLimitDto());
     }
 

@@ -18,7 +18,7 @@ namespace WebApiTaskify.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     OrgId = table.Column<string>(type: "text", nullable: false),
                     Action = table.Column<string>(type: "text", nullable: false),
-                    EntityId = table.Column<string>(type: "text", nullable: false),
+                    EntityId = table.Column<Guid>(type: "uuid", nullable: false),
                     EntityTitle = table.Column<string>(type: "text", nullable: false),
                     EntityType = table.Column<string>(type: "text", nullable: false),
                     UserId = table.Column<string>(type: "text", nullable: false),
@@ -37,7 +37,7 @@ namespace WebApiTaskify.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    OrgId = table.Column<Guid>(type: "uuid", nullable: false),
+                    OrgId = table.Column<string>(type: "text", nullable: false),
                     Title = table.Column<string>(type: "text", nullable: false),
                     ImageId = table.Column<string>(type: "text", nullable: false),
                     ImageThumbUrl = table.Column<string>(type: "text", nullable: false),
@@ -57,7 +57,7 @@ namespace WebApiTaskify.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    OrgId = table.Column<Guid>(type: "uuid", nullable: false),
+                    OrgId = table.Column<string>(type: "text", nullable: false),
                     Limit = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)

@@ -17,7 +17,7 @@ public static class OrgMappers
         };
     }
 
-    public static OrgLimits ToCreateFromOrgLimitDto(this CreateOrgLimitDto createOrgLimitDto, Guid orgId)
+    public static OrgLimits ToCreateFromOrgLimitDto(this CreateOrgLimitDto createOrgLimitDto, string orgId)
     {
         return new OrgLimits
         {

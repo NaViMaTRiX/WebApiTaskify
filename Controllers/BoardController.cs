@@ -40,8 +40,8 @@ public class BoardController : ControllerBase
         return Ok(board.ToBoardDto());
     }
 
-    [HttpPost("{orgId:guid}")]
-    public async Task<IActionResult> Create([FromRoute] Guid orgId, [FromBody] CreateBoardDto boardDto)
+    [HttpPost("{orgId}")]
+    public async Task<IActionResult> Create([FromRoute] string orgId, [FromBody] CreateBoardDto boardDto)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -49,8 +49,12 @@ public class BoardController : ControllerBase
         // TODO: проверка orgId через станонный сервис. Получается нужно получать orgId из контроллера другого api.
         
         var boardModel = boardDto.ToBoardFromCreate(orgId);
-        await _boardRepository.CreateAsync(boardModel);
-        return CreatedAtAction(nameof(GetById), new { id = boardModel.Id }, boardModel.ToBoardDto());
+        var board = await _boardRepository.CreateAsync(boardModel);
+        
+        if (board is null)
+            return BadRequest("Failed to create board");
+        
+        return CreatedAtAction(nameof(GetById), new { id = board.Id }, board.ToBoardDto());
     }
 
     [HttpPut("{id:guid}")]

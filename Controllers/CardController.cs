@@ -4,7 +4,6 @@ using Dtos.Card;
 using Interface;
 using Mappers;
 using Microsoft.AspNetCore.Mvc;
-using Repository;
 
 [ApiController]
 [Route("api/v{version:apiVersion}/card")]
@@ -53,8 +52,12 @@ public class CardController : ControllerBase
             return BadRequest("List not found");
         
         var cardModel = createCardDto.ToCardFromCreate(listId);
-        await _cardRepository.CreateAsync(cardModel);
-        return CreatedAtAction(nameof(GetById), new { id = cardModel.Id }, cardModel.ToCardDto());
+        var card = await _cardRepository.CreateAsync(cardModel);
+        
+        if (card is null)
+            return BadRequest("Failed to create card");
+        
+        return CreatedAtAction(nameof(GetById), new { id = card.Id }, card.ToCardDto());
     }
 
     [HttpPut("{id:guid}")]

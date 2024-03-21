@@ -1,0 +1,42 @@
+﻿namespace WebApiTaskify.Mappers;
+
+using Dtos.AuditLog;
+using Models;
+
+public static class AuditLogMappers
+{
+    public static AuditLogDto ToAuditLogDto(this AuditLogs auditLog)
+    {
+        return new AuditLogDto
+        {
+            Id = auditLog.Id,
+            OrgId = auditLog.OrgId,
+            UserId = auditLog.UserId,
+            UserName = auditLog.UserName,
+            UserImage = auditLog.UserImage,
+            Action = auditLog.Action,
+            EntityId = auditLog.EntityId,
+            EntityTitle = auditLog.EntityTitle,
+            EntityType = auditLog.EntityType,
+            CreatedAt = auditLog.CreatedAt,
+            UpdatedAt = auditLog.UpdatedAt
+        };
+    }
+
+    public static AuditLogs ToAuditLogsFromCreate(this CreateAuditLogDto createAuditLog)
+    {
+        return new AuditLogs
+        {
+            OrgId = createAuditLog.OrgId,
+            UserId = createAuditLog.UserId,
+            UserName = createAuditLog.UserName,
+            UserImage = createAuditLog.UserImage,
+            Action = createAuditLog.Action,
+            EntityId = createAuditLog.EntityId,
+            EntityTitle = createAuditLog.EntityTitle,
+            EntityType = createAuditLog.EntityType,
+            CreatedAt = createAuditLog.CreatedAt,
+            UpdatedAt = createAuditLog.UpdatedAt
+        };
+    }
+}

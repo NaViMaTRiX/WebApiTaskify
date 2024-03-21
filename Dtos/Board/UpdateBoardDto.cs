@@ -5,6 +5,8 @@ using System.ComponentModel.DataAnnotations;
 public class UpdateBoardDto
 {
     [Required]
+    [MinLength(3)]
+    [MaxLength(30)]
     public string Title { get; set; } = string.Empty;
     [Required]
     public string ImageId { get; set; } = string.Empty;

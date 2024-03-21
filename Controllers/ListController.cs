@@ -54,8 +54,11 @@ public class ListController : ControllerBase
          }
 
          var listModel = createListDto.ToListFromCreate(boardId);
-         await _listRepository.CreateAsync(listModel);
-         return CreatedAtAction(nameof(GetById), new { id = listModel.Id }, listModel.ToListDto());
+         var list = await _listRepository.CreateAsync(listModel);
+         
+         if (list is null)
+             return BadRequest("Failed to create list");
+         return CreatedAtAction(nameof(GetById), new { id = list.Id }, list.ToListDto());
     }
 
     [HttpPut("{id:guid}")]

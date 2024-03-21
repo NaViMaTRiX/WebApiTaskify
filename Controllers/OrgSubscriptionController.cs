@@ -40,8 +40,8 @@ public class OrgSubscriptionController : ControllerBase
         return Ok(orgSubscription.ToOrgSubscriptionDto());
     }
 
-    [HttpPost("{orgId:guid}")]
-    public async Task<IActionResult> Create([FromBody] CreateOrgSubscriptionDto createOrgSubscriptionDto, Guid orgId)
+    [HttpPost("{orgId}")]
+    public async Task<IActionResult> Create([FromBody] CreateOrgSubscriptionDto createOrgSubscriptionDto, string orgId)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -50,14 +50,14 @@ public class OrgSubscriptionController : ControllerBase
         var result = await _orgSubscriptionRepository.CreateAsync(orgSubscription);
         
         if (result is null)
-            return NotFound("OrgSubscription not found");
+            return BadRequest("Failed to create orgSubscription");
         
         return CreatedAtAction(nameof(GetById), new { id = result.Id }, result.ToOrgSubscriptionDto());
     }
     
     //[HttpPut("{id:guid}")]
 
-    [HttpDelete("{id:guid]")]
+    [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Delete(Guid id)
     {
         if (!ModelState.IsValid)

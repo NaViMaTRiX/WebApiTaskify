@@ -33,7 +33,7 @@ builder.Services.AddScoped<IListRepository, ListRepository>();
 builder.Services.AddScoped<ICardRepository, CardRepository>();
 builder.Services.AddScoped<IOrgLimitRepository, OrgLimitRepository>();
 builder.Services.AddScoped<IOrgSubscriptionRepository, OrgSubscriptionRepository>();
-
+builder.Services.AddScoped<IAuditLogRepository, AuditLogRepository>();
 
 var app = builder.Build();
 
@@ -44,7 +44,5 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.MapControllers();
-
 app.UseHttpsRedirection();
-
 app.Run();
