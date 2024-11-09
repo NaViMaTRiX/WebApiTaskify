@@ -1,17 +1,19 @@
-﻿namespace WebApiTaskify.Data;
+﻿using WebApiTaskify.Models.Enum;
+
+namespace WebApiTaskify.Data;
 
 using Microsoft.EntityFrameworkCore;
 using Models;
 
-public class AppDBContext : DbContext
+public class AppDbContext : DbContext
 {
-    public AppDBContext(DbContextOptions<AppDBContext> options) : base(options)
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {}
-
-    public DbSet<Boards> Boards { get; set; }
-    public DbSet<Lists> Lists { get; set; }
-    public DbSet<Cards> Cards { get; set; }
-    public DbSet<AuditLogs> AuditLogs { get; set; }
-    public DbSet<OrgLimits> OrgLimits { get; set; }
-    public DbSet<OrgSubscriptions> OrgSubscriptions { get; set; }
+    
+    public DbSet<Board> Board { get; set; }
+    public DbSet<List> List { get; set; }
+    public DbSet<Card> Card { get; set; }
+    public DbSet<AuditLog> AuditLog { get; set; }
+    public DbSet<OrgLimit> OrgLimit { get; set; }
+    public DbSet<OrgSubscription> OrgSubscription { get; set; }
 }

@@ -4,10 +4,10 @@ using Models;
 
 public interface IBoardRepository
 {
-    Task<List<Boards>> GetAllAsync();
-    Task<Boards?> GetByIdAsync(Guid id);
-    Task<Boards?> CreateAsync(Boards boardsModel);
-    Task<Boards?> UpdateAsync(Guid id, Boards boardsModel);
-    Task<Boards?> DeleteAsync(Guid id);
-    Task<bool> ExistAsync(Guid id);
+    Task<List<Board>> GetAllAsync();
+    Task<Board?> GetByIdAsync(string id);
+    Task<Board?> CreateAsync(string orgId, Board boardModel);
+    Task<Board?> UpdateAsync(string id, Board boardModel);
+    Task<Board?> DeleteAsync(string id);
+    Task<bool> ExistAsync(string id);
 }

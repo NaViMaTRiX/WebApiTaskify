@@ -5,28 +5,28 @@ using Models;
 
 public static class OrgSubscriptionMappers
 {
-    public static OrgSubscriptionDto ToOrgSubscriptionDto(this OrgSubscriptions orgSubscription)
+    public static OrgSubscriptionDto ToOrgSubscriptionDto(this OrgSubscription orgSubscription)
     {
         return new OrgSubscriptionDto
         {
-            Id = orgSubscription.Id,
-            OrgId = orgSubscription.OrgId,
-            StripePriseId = orgSubscription.StripePriseId,
-            StripeCustomerId = orgSubscription.StripeCustomerId,
-            StripeSubscriptionId = orgSubscription.StripeSubscriptionId,
-            StripeCurrentPeriodEnd = orgSubscription.StripeCurrentPeriodEnd,
+            Id = orgSubscription.id,
+            OrgId = orgSubscription.orgId,
+            StripePriseId = orgSubscription.stripe_price_id,
+            StripeCustomerId = orgSubscription.stripe_customer_id,
+            StripeSubscriptionId = orgSubscription.stripe_subscription_id,
+            StripeCurrentPeriodEnd = orgSubscription.stripe_current_period_end,
         };
     }
 
-    public static OrgSubscriptions ToOrgSubscriptionDtoFromCreate(this CreateOrgSubscriptionDto createOrgSubscription)
+    public static OrgSubscription ToOrgSubscriptionDtoFromCreate(this CreateOrgSubscriptionDto createOrgSubscription, string orgId)
     {
-        return new OrgSubscriptions
+        return new OrgSubscription
         {
-            OrgId = createOrgSubscription.OrgId,
-            StripePriseId = createOrgSubscription.StripePriseId,
-            StripeCustomerId = createOrgSubscription.StripeCustomerId,
-            StripeSubscriptionId = createOrgSubscription.StripeSubscriptionId,
-            StripeCurrentPeriodEnd = createOrgSubscription.StripeCurrentPeriodEnd,
+            id = Guid.NewGuid().ToString(),
+            orgId = orgId,
+            stripe_price_id = createOrgSubscription.StripePriseId,
+            stripe_customer_id = createOrgSubscription.StripeCustomerId,
+            stripe_subscription_id = createOrgSubscription.StripeSubscriptionId,
         };
     }
 }

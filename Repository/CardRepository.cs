@@ -7,56 +7,59 @@ using Models;
 
 public class CardRepository : ICardRepository
 {
-    private readonly AppDBContext _context;
+    private readonly AppDbContext _context;
 
-    public CardRepository(AppDBContext context)
+    public CardRepository(AppDbContext context)
     {
         _context = context;
     }
-    public async Task<List<Cards>> GetAllAsync()
+    public async Task<List<Card>> GetAllAsync()
     {
-        return await _context.Cards.ToListAsync();
+        return await _context.Card.ToListAsync();
     }
 
-    public async Task<Cards?> GetByIdAsync(Guid id)
+    public async Task<Card?> GetByIdAsync(string id)
     {
-        return await _context.Cards.FindAsync(id);
+        return await _context.Card.SingleOrDefaultAsync(x => x.id == id);
     }
 
-    public async Task<Cards?> CreateAsync(Cards cardModel)
+    public async Task<Card?> CreateAsync(Card cardModel)
     {
-        await _context.Cards.AddAsync(cardModel);
+        await _context.Card.AddAsync(cardModel);
         await _context.SaveChangesAsync();
         return cardModel;
     }
 
-    public async Task<Cards?> UpdateAsync(Guid id, Cards cardModel)
+    public async Task<Card?> UpdateAsync(string id, Card cardModel)
     {
-        var checkCard = await _context.Cards.FindAsync(id);
+        var checkCard = await GetByIdAsync(id);
         if(checkCard is null)
             return null;
         
-        checkCard.Title = cardModel.Title;
-        checkCard.Description = cardModel.Description;
-        checkCard.Order = cardModel.Order;
-        checkCard.isChecked = cardModel.isChecked;
-        checkCard.UpdatedAt = cardModel.UpdatedAt;
-        await _context.SaveChangesAsync();
-        return cardModel;
-    }
-
-    public async Task<Cards?> DeleteAsync(Guid id)
-    {
-        var checkCard = await _context.Cards.FindAsync(id);
-        if(checkCard is null)
-            return null;
-        _context.Cards.Remove(checkCard);
+        checkCard.title = cardModel.title;
+        checkCard.description = cardModel.description;
+        checkCard.order = cardModel.order;
+        checkCard.timer = cardModel.timer;
+        checkCard.timeStart = cardModel.timeStart;
+        checkCard.timeEnd = cardModel.timeEnd;
+        checkCard.ready = cardModel.ready;
+        checkCard.updatedAt = cardModel.updatedAt;
         await _context.SaveChangesAsync();
         return checkCard;
     }
 
-    public  Task<bool> ExistAsync(Guid id)
+    public async Task<Card?> DeleteAsync(string id)
     {
-        return _context.Cards.AnyAsync(x=>x.Id == id);
+        var checkCard = await GetByIdAsync(id);
+        if(checkCard is null)
+            return null;
+        _context.Card.Remove(checkCard);
+        await _context.SaveChangesAsync();
+        return checkCard;
+    }
+
+    public  Task<bool> ExistAsync(string id)
+    {
+        return _context.Card.AnyAsync(x=>x.id == id);
     }
 }

@@ -26,11 +26,11 @@ public class ListController : ControllerBase
 
         var lists = await _listRepository.GetAllAsync(); 
         var result = lists.Select(x => x.ToListDto());
-        return Ok(result);
+        return Ok(lists);
     }
 
-    [HttpGet("{id:guid}")]
-    public async Task<IActionResult> GetById(Guid id)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(string id)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -42,8 +42,8 @@ public class ListController : ControllerBase
         return Ok(list.ToListDto());
     }
 
-    [HttpPost("{boardId:guid}")]
-    public async Task<IActionResult> Create([FromRoute] Guid boardId, [FromBody] CreateListDto createListDto)
+    [HttpPost("{boardId}")]
+    public async Task<IActionResult> Create([FromRoute] string boardId, [FromBody] CreateListDto createListDto)
     {
          if (!ModelState.IsValid)
              return BadRequest(ModelState);
@@ -58,11 +58,11 @@ public class ListController : ControllerBase
          
          if (list is null)
              return BadRequest("Failed to create list");
-         return CreatedAtAction(nameof(GetById), new { id = list.Id }, list.ToListDto());
+         return CreatedAtAction(nameof(GetById), new { id = list.id }, list.ToListDto());
     }
 
-    [HttpPut("{id:guid}")]
-    public async Task<IActionResult> Update(Guid id, [FromBody] UpdateListDto updateListDto)
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(string id, [FromBody] UpdateListDto updateListDto)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -75,8 +75,8 @@ public class ListController : ControllerBase
         return Ok(checkList.ToListDto());
     }
 
-    [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> Delete(Guid id)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(string id) //TODO: make full delete list with all cards
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);

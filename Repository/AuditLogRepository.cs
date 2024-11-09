@@ -7,44 +7,43 @@ using Models;
 
 public class AuditLogRepository : IAuditLogRepository
 {
-    private readonly AppDBContext _context;
+    private readonly AppDbContext _context;
 
-    public AuditLogRepository(AppDBContext context)
+    public AuditLogRepository(AppDbContext context)
     {
         _context = context;
     }
 
-    public async Task<List<AuditLogs>> GetAllAsync()
+    public async Task<List<AuditLog>> GetAllAsync()
     {
-        return await _context.AuditLogs.ToListAsync();
+        return await _context.AuditLog.ToListAsync();
     }
 
-    public async Task<AuditLogs?> GetByIdAsync(Guid id)
+    public async Task<AuditLog?> GetByIdAsync(string id)
     {
-        return await _context.AuditLogs.FindAsync(id);
+        return await _context.AuditLog.SingleOrDefaultAsync(x => x.id == id);
     }
 
-    public async Task<AuditLogs?> CreateAsync(AuditLogs boardsModel)
+    public async Task<AuditLog?> CreateAsync(AuditLog boardsModel)
     {
-        await _context.AuditLogs.AddAsync(boardsModel);
+        await _context.AuditLog.AddAsync(boardsModel);
         await _context.SaveChangesAsync();
         return boardsModel;
     }
 
-    public async Task<AuditLogs?> DeleteAsync(Guid id)
+    public async Task<AuditLog?> DeleteAsync(string id)
     {
-        var audit = await _context.AuditLogs.FindAsync(id);
-
+        var audit = await _context.AuditLog.SingleOrDefaultAsync(x => x.id == id);
         if (audit is null)
             return null;
         
-        _context.AuditLogs.Remove(audit);
+        _context.AuditLog.Remove(audit);
         await _context.SaveChangesAsync();
         return audit;
     }
 
-    public async Task<bool> ExistAsync(Guid id)
+    public async Task<bool> ExistAsync(string id)
     {
-        return await _context.AuditLogs.AnyAsync(x => x.Id == id);
+        return await _context.AuditLog.AnyAsync(x => x.id == id);
     }
 }

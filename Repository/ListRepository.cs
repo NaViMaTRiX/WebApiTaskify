@@ -7,59 +7,59 @@ using Models;
 
 public class ListRepository : IListRepository
 {
-    private readonly AppDBContext _context;
+    private readonly AppDbContext _context;
 
-    public ListRepository(AppDBContext context)
+    public ListRepository(AppDbContext context)
     {
         _context = context;
     }
     
-    public async Task<List<Lists>> GetAllAsync()
+    public async Task<List<List>> GetAllAsync()
     {
-        return await _context.Lists.ToListAsync();
+        return await _context.List.ToListAsync();
     }
 
-    public async Task<Lists?> GetByIdAsync(Guid id)
+    public async Task<List?> GetByIdAsync(string id)
     {
-        return await _context.Lists.FindAsync(id);
+        return await _context.List.SingleOrDefaultAsync(x => x.id == id);
     }
 
-    public async Task<Lists?> CreateAsync(Lists listModel)
+    public async Task<List?> CreateAsync(List listModel)
     {
-        await _context.Lists.AddAsync(listModel);
+        await _context.List.AddAsync(listModel);
         await _context.SaveChangesAsync();
         return listModel;
     }
 
-    public async Task<Lists?> UpdateAsync(Guid id, Lists listModel)
+    public async Task<List?> UpdateAsync(string id, List listModel)
     {
-        var list = await _context.Lists.FindAsync(id);
+        var list = await GetByIdAsync(id);
         
         if (list is null) 
             return null;
         
-        list.Title = listModel.Title;
-        list.Order = listModel.Order;
-        list.UpdatedAt = listModel.UpdatedAt;
+        list.title = listModel.title;
+        list.order = listModel.order;
+        list.updatedAt = listModel.updatedAt;
         
         await _context.SaveChangesAsync();
         
         return list;
     }
 
-    public async Task<Lists?> DeleteAsync(Guid id)
+    public async Task<List?> DeleteAsync(string id)
     {
-        var list = await _context.Lists.FindAsync(id);
+        var list = await GetByIdAsync(id);
         if (list is null)
             return null;
         
-        _context.Lists.Remove(list);
+        _context.List.Remove(list);
         await _context.SaveChangesAsync();
         return list;
     }
 
-    public async Task<bool> ExistAsync(Guid id)
+    public async Task<bool> ExistAsync(string id)
     {
-        return await _context.Lists.AnyAsync(x => x.Id == id);
+        return await _context.List.AnyAsync(x => x.id == id);
     }
 }

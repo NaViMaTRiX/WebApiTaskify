@@ -1,4 +1,6 @@
-﻿namespace WebApiTaskify.Dtos.AuditLog;
+﻿using WebApiTaskify.Models.Enum;
+
+namespace WebApiTaskify.Dtos.AuditLog;
 
 using System.ComponentModel.DataAnnotations;
 
@@ -7,13 +9,13 @@ public class CreateAuditLogDto
     [Required]
     public string OrgId { get; set; } = String.Empty;
     [Required]
-    public string Action { get; set; } = String.Empty;
-    [Required]
-    public Guid EntityId { get; set; } = Guid.Empty;
+    public ACTION Action { get; set; }
+    [Required] 
+    public string EntityId { get; set; } = string.Empty;
     [Required]
     public string EntityTitle { get; set; } = String.Empty;
     [Required]
-    public string EntityType { get; set; } = String.Empty;
+    public ENTITY_TYPE EntityType { get; set; }
     [Required]
     public string UserId { get; set; } = String.Empty;
     [Required]

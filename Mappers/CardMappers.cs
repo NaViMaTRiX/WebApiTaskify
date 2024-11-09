@@ -5,44 +5,54 @@ using Models;
 
 public static class CardMappers
 {
-    public static CardDto ToCardDto(this Cards cardDto)
+    public static CardDto ToCardDto(this Card cardDto)
     {
         return new CardDto
         {
-            Id = cardDto.Id,
-            Title = cardDto.Title,
-            Description = cardDto.Description,
-            Order = cardDto.Order,
-            isChecked = cardDto.isChecked,
-            CreatedAt = cardDto.CreatedAt,
-            UpdatedAt = cardDto.UpdatedAt,
-            ListId = cardDto.ListId
+            id = cardDto.id,
+            listId = cardDto.listId,
+            title = cardDto.title,
+            description = cardDto.description,
+            order = cardDto.order,
+            readyChecked = cardDto.ready,
+            timeStart = cardDto.timeStart,
+            timeEnd = cardDto.timeEnd,
+            timeChecked = cardDto.timer,
+            createdAt = cardDto.createdAt,
+            updatedAt = cardDto.updatedAt
         };
     }
 
-    public static Cards ToCardFromCreate(this CreateCardDto createCardDto, Guid listId)
+    public static Card ToCardFromCreate(this CreateCardDto createCardDto, string listId)
     {
-        return new Cards
+        return new Card
         {
-            Title = createCardDto.Title,
-            Description = createCardDto.Description,
-            Order = createCardDto.Order,
-            CreatedAt = createCardDto.CreatedAt,
-            UpdatedAt = createCardDto.UpdatedAt,
-            isChecked = createCardDto.isChecked,
-            ListId = listId
+            id = Guid.NewGuid().ToString(),
+            listId = listId,
+            title = createCardDto.Title,
+            description = createCardDto.Description,
+            order = createCardDto.Order,
+            timer = createCardDto.TimeChecked,
+            ready = createCardDto.ReadyChecked,
+            timeStart = createCardDto.CreatedAt,
+            timeEnd = createCardDto.UpdatedAt,
+            createdAt = createCardDto.CreatedAt,
+            updatedAt = createCardDto.UpdatedAt,
         };
     }
 
-    public static Cards ToCardFromUpdate(this UpdateCardDto updateCardDto)
+    public static Card ToCardFromUpdate(this UpdateCardDto updateCardDto)
     {
-        return new Cards
+        return new Card
         {
-            Title = updateCardDto.Title,
-            Description = updateCardDto.Description,
-            Order = updateCardDto.Order,
-            UpdatedAt = updateCardDto.UpdatedAt,
-            isChecked = updateCardDto.isChecked,
+            title = updateCardDto.Title,
+            description = updateCardDto.Description,
+            order = updateCardDto.Order,
+            ready = updateCardDto.ReadyChecked,
+            timer = updateCardDto.TimeChecked,
+            timeStart = updateCardDto.TimeStart,
+            timeEnd = updateCardDto.TimeEnd,
+            updatedAt = updateCardDto.UpdatedAt,
         };
     }
 }

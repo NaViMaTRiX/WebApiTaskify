@@ -2,7 +2,7 @@
 
 public class OrgSubscriptionDto
 {
-    public Guid Id { get; set; } = Guid.NewGuid();
+    public string Id { get; set; } = string.Empty;
     public string OrgId { get; set; } = String.Empty;
     public string StripeCustomerId { get; set; } = String.Empty;
     public string StripeSubscriptionId { get; set; } = String.Empty;

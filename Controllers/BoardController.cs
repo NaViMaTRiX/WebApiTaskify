@@ -27,8 +27,8 @@ public class BoardController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("{id:guid}")]
-    public async Task<IActionResult> GetById([FromRoute] Guid id)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById([FromRoute] string id)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -49,16 +49,16 @@ public class BoardController : ControllerBase
         // TODO: проверка orgId через станонный сервис. Получается нужно получать orgId из контроллера другого api.
         
         var boardModel = boardDto.ToBoardFromCreate(orgId);
-        var board = await _boardRepository.CreateAsync(boardModel);
+        var board = await _boardRepository.CreateAsync(orgId, boardModel);
         
         if (board is null)
             return BadRequest("Failed to create board");
         
-        return CreatedAtAction(nameof(GetById), new { id = board.Id }, board.ToBoardDto());
+        return CreatedAtAction(nameof(GetById), new { id = board.id }, board.ToBoardDto());
     }
 
-    [HttpPut("{id:guid}")]
-    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateBoardDto boardDto)
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update([FromRoute] string id, [FromBody] UpdateBoardDto boardDto)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -71,8 +71,8 @@ public class BoardController : ControllerBase
         return Ok(boardModel.ToBoardDto());
     }
 
-    [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> Delete([FromRoute] Guid id)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete([FromRoute] string id)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);

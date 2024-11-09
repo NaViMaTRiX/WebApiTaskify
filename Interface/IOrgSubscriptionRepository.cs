@@ -4,9 +4,9 @@ using Models;
 
 public interface IOrgSubscriptionRepository
 {
-    Task<List<OrgSubscriptions>> GetAllAsync();
-    Task<OrgSubscriptions?> GetByIdAsync(Guid id);
-    Task<OrgSubscriptions?> CreateAsync(OrgSubscriptions listModel); 
-    Task<OrgSubscriptions?> DeleteAsync(Guid id);
-    Task<bool> ExistAsync(Guid id);
+    Task<List<OrgSubscription>> GetAllAsync();
+    Task<OrgSubscription?> GetByIdAsync(string id);
+    Task<OrgSubscription?> CreateAsync(OrgSubscription listModel); 
+    Task<OrgSubscription?> DeleteAsync(string id);
+    Task<bool> ExistAsync(string id);
 }

@@ -14,8 +14,14 @@ public class CreateCardDto
     [MinLength(3)]
     [MaxLength(300)]
     public string Description { get; set; } = string.Empty;
-    [Required]
-    public bool isChecked { get; set; } = false;
+  
+    [Required] 
+    public bool TimeChecked { get; set; } //хз
+    [Required] 
+    public bool ReadyChecked { get; set; } //хз
+    public DateTime? TimeStart { get; set; }
+    public DateTime? TimeEnd { get; set; }
+    
     [Required]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     [Required]

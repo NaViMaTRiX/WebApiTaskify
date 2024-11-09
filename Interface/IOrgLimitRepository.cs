@@ -4,10 +4,10 @@ using Models;
 
 public interface IOrgLimitRepository
 {
-    Task<List<OrgLimits>> GetAllAsync();
-    Task<OrgLimits?> GetByIdAsync(Guid id);
-    Task<OrgLimits?> CreateAsync(OrgLimits listModel); 
-    Task<OrgLimits?> UpdateAsync(Guid id, OrgLimits listModel);
-    Task<OrgLimits?> DeleteAsync(Guid id);
-    Task<bool> ExistAsync(Guid id);
+    Task<List<OrgLimit>> GetAllAsync();
+    Task<OrgLimit?> GetByIdAsync(string id);
+    Task<OrgLimit?> CreateAsync(OrgLimit listModel); 
+    Task<OrgLimit?> UpdateAsync(string id, OrgLimit listModel);
+    Task<OrgLimit?> DeleteAsync(string id);
+    Task<bool> ExistAsync(string id);
 }

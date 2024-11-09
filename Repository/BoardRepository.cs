@@ -7,64 +7,68 @@ using Models;
 
 public class BoardRepository : IBoardRepository
 {
-    private readonly AppDBContext _context;
+    private readonly AppDbContext _context;
 
-    public BoardRepository(AppDBContext context)
+    public BoardRepository(AppDbContext context)
     {
         _context = context;
     }
 
-    public async Task<List<Boards>> GetAllAsync()
+    public async Task<List<Board>> GetAllAsync()
     {
-        return await _context.Boards.ToListAsync();
+        return await _context.Board.ToListAsync();
     }
 
-    public async Task<Boards?> GetByIdAsync(Guid id)
+    public async Task<Board?> GetByIdAsync(string id)
     {
-        return await _context.Boards.FindAsync(id);
+        return await _context.Board.SingleOrDefaultAsync(x => x.id == id);
     }
 
-    public async Task<Boards?> CreateAsync(Boards boardsModel)
+    public async Task<Board?> CreateAsync(string orgId, Board boardModel)
     {
-        await _context.Boards.AddAsync(boardsModel);
+        var objOrgId = await _context.Board.SingleOrDefaultAsync(x => x.orgId == orgId);
+        if (objOrgId is null)
+            return null;
+        
+        await _context.Board.AddAsync(boardModel);
         await _context.SaveChangesAsync();
-        return boardsModel;
+        return boardModel;
     }
 
-    public async Task<Boards?> UpdateAsync(Guid id, Boards boardsModel)
+    public async Task<Board?> UpdateAsync(string id, Board boardModel)
     {
-        var board = await _context.Boards.FindAsync(id);
+        var board = await GetByIdAsync(id);
         
         if (board is null)
             return null;
         
-        board.OrgId = boardsModel.OrgId;
-        board.Title = boardsModel.Title;
-        board.ImageId = boardsModel.ImageId;
-        board.ImageThumbUrl = boardsModel.ImageThumbUrl;
-        board.ImageFullUrl = boardsModel.ImageFullUrl;
-        board.ImageUserName = boardsModel.ImageUserName;
-        board.ImageLinkHtml = boardsModel.ImageLinkHtml;
-        board.UpdatedAt = boardsModel.UpdatedAt;
+        board.orgId = boardModel.orgId;
+        board.title = boardModel.title;
+        board.imageId = boardModel.imageId;
+        board.imageThumbUrl = boardModel.imageThumbUrl;
+        board.imageFullUrl = boardModel.imageFullUrl;
+        board.imageUserName = boardModel.imageUserName;
+        board.imageLinkHTML = boardModel.imageLinkHTML;
+        board.updatedAt = boardModel.updatedAt;
         
         await _context.SaveChangesAsync();
         return board;
     }
 
-    public async Task<Boards?> DeleteAsync(Guid id)
+    public async Task<Board?> DeleteAsync(string id)
     {
-        var board = await _context.Boards.FindAsync(id);
+        var board = await GetByIdAsync(id);
         
         if (board is null)
             return null;
         
-        _context.Boards.Remove(board);
+        _context.Board.Remove(board);
         await _context.SaveChangesAsync();
         return board;
     }
 
-    public Task<bool> ExistAsync(Guid id)
+    public Task<bool> ExistAsync(string id)
     {
-        return _context.Boards.AnyAsync(x => x.Id == id);
+        return _context.Board.AnyAsync(x => x.id == id);
     }
 }

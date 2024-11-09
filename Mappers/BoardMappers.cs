@@ -5,50 +5,51 @@ using Models;
 
 public static class BoardMappers
 {
-    public static BoardDto ToBoardDto(this Boards boardsModel) // изпользуется для вывода данных на страницу
+    public static BoardDto ToBoardDto(this Board boardModel) // изпользуется для вывода данных на страницу
     {
         return new BoardDto
         {
-            Id = boardsModel.Id,
-            OrgId = boardsModel.OrgId,
-            Title = boardsModel.Title,
-            ImageId = boardsModel.ImageId,
-            ImageFullUrl = boardsModel.ImageFullUrl,
-            ImageUserName = boardsModel.ImageUserName,
-            ImageThumbUrl = boardsModel.ImageThumbUrl,
-            ImageLinkHtml = boardsModel.ImageLinkHtml,
-            CreatedAt = boardsModel.CreatedAt,
-            UpdatedAt = boardsModel.UpdatedAt,
+            Id = boardModel.id,
+            OrgId = boardModel.orgId,
+            Title = boardModel.title,
+            ImageId = boardModel.imageId,
+            ImageFullUrl = boardModel.imageFullUrl,
+            ImageUserName = boardModel.imageUserName,
+            ImageThumbUrl = boardModel.imageThumbUrl,
+            ImageLinkHtml = boardModel.imageLinkHTML,
+            CreatedAt = boardModel.createdAt,
+            UpdatedAt = boardModel.updatedAt,
         };
     }
 
-    public static Boards ToBoardFromCreate(this CreateBoardDto createBoardModel, string orgId) // изпользуется для получения данных из формы
+    public static Board ToBoardFromCreate(this CreateBoardDto createBoardModel, string orgId) // изпользуется для получения данных из формы
     {
-        return new Boards
+        return new Board
         {
-            OrgId = orgId,
-            Title = createBoardModel.Title,
-            ImageId = createBoardModel.ImageId,
-            ImageFullUrl = createBoardModel.ImageFullUrl,
-            ImageUserName = createBoardModel.ImageUserName,
-            ImageThumbUrl = createBoardModel.ImageThumbUrl,
-            ImageLinkHtml = createBoardModel.ImageLinkHtml,
-            CreatedAt = createBoardModel.CreatedAt,
-            UpdatedAt = createBoardModel.UpdatedAt,
+            id = Guid.NewGuid().ToString(),
+            orgId = orgId,
+            title = createBoardModel.Title,
+            imageId = createBoardModel.ImageId,
+            imageFullUrl = createBoardModel.ImageFullUrl,
+            imageUserName = createBoardModel.ImageUserName,
+            imageThumbUrl = createBoardModel.ImageThumbUrl,
+            imageLinkHTML = createBoardModel.ImageLinkHtml,
+            createdAt = createBoardModel.CreatedAt,
+            updatedAt = createBoardModel.UpdatedAt,
         };
     }
 
-    public static Boards ToBoardFromUpdate(this UpdateBoardDto updateBoardModel) // изпользуется для получения данных из формы
+    public static Board ToBoardFromUpdate(this UpdateBoardDto updateBoardModel) // изпользуется для получения данных из формы
     {
-        return new Boards
+        return new Board
         {
-            Title = updateBoardModel.Title,
-            ImageId = updateBoardModel.ImageId,
-            ImageFullUrl = updateBoardModel.ImageFullUrl,
-            ImageUserName = updateBoardModel.ImageUserName,
-            ImageThumbUrl = updateBoardModel.ImageThumbUrl,
-            ImageLinkHtml = updateBoardModel.ImageLinkHtml,
-            UpdatedAt = updateBoardModel.UpdatedAt,
+            orgId = updateBoardModel.OrgId,
+            title = updateBoardModel.Title,
+            imageId = updateBoardModel.ImageId,
+            imageFullUrl = updateBoardModel.ImageFullUrl,
+            imageUserName = updateBoardModel.ImageUserName,
+            imageThumbUrl = updateBoardModel.ImageThumbUrl,
+            imageLinkHTML = updateBoardModel.ImageLinkHtml,
         };
     }
 }

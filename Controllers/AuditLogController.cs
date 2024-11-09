@@ -27,8 +27,8 @@ public class AuditLogController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("{id:guid}")]
-    public async Task<IActionResult> GetById(Guid id)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(string id)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -52,11 +52,11 @@ public class AuditLogController : ControllerBase
         if (auditLog == null)
             return BadRequest("Failed to create audit log");
         
-        return CreatedAtAction(nameof(GetById), new { id = auditLog.Id }, auditLog.ToAuditLogDto());
+        return CreatedAtAction(nameof(GetById), new { id = auditLog.id }, auditLog.ToAuditLogDto());
     }
 
-    [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> Delete(Guid id)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(string id)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);

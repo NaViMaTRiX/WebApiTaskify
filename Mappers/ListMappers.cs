@@ -5,39 +5,40 @@ using Models;
 
 public static class ListMappers
 {
-    public static ListDto ToListDto(this Lists listModel) // изпользуется длЯ вывода данных на страницу
+    public static ListDto ToListDto(this List listModel) // изпользуется длЯ вывода данных на страницу
     {
         return new ListDto
         {
-            Id = listModel.Id,
-            Title = listModel.Title,
-            Order = listModel.Order,
-            CreatedAt = listModel.CreatedAt,
-            UpdatedAt = listModel.UpdatedAt,
-            BoardId = listModel.BoardId,
+            Id = listModel.id,
+            Title = listModel.title,
+            Order = listModel.order,
+            CreatedAt = listModel.createdAt,
+            UpdatedAt = listModel.updatedAt,
+            BoardId = listModel.boardId,
         };
     }
 
     // изпользуется для ввода данных на форму
-    public static Lists ToListFromCreate(this CreateListDto createListModel, Guid boardId)
+    public static List ToListFromCreate(this CreateListDto createListModel, string boardId)
     {
-        return new Lists
+        return new List
         {
-            Title = createListModel.Title,
-            Order = createListModel.Order,
-            CreatedAt = createListModel.CreatedAt,
-            UpdatedAt = createListModel.UpdatedAt,
-            BoardId = boardId,
+            id = Guid.NewGuid().ToString(),
+            boardId = boardId,
+            title = createListModel.Title,
+            order = createListModel.Order,
+            createdAt = createListModel.CreatedAt,
+            updatedAt = createListModel.UpdatedAt,
         };
     }
 
-    public static Lists ToListFromUpdate(this UpdateListDto updateListModel)
+    public static List ToListFromUpdate(this UpdateListDto updateListModel)
     {
-        return new Lists
+        return new List
         {
-            Title = updateListModel.Title,
-            Order = updateListModel.Order,
-            UpdatedAt = updateListModel.UpdatedAt
+            title = updateListModel.Title,
+            order = updateListModel.Order,
+            updatedAt = updateListModel.UpdatedAt
         };
     }
 }

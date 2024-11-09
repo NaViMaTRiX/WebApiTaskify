@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 public class UpdateBoardDto
 {
+    public string OrgId { get; set; }
     [Required]
     [MinLength(3)]
     [MaxLength(30)]
@@ -18,6 +19,4 @@ public class UpdateBoardDto
     public string ImageUserName { get; set; } = string.Empty;
     [Required]
     public string ImageLinkHtml { get; set; } = string.Empty;
-    [Required]
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }

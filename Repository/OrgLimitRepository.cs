@@ -7,55 +7,56 @@ using Models;
 
 public class OrgLimitRepository : IOrgLimitRepository
 {
-    private readonly AppDBContext _context;
+    private readonly AppDbContext _context;
 
-    public OrgLimitRepository(AppDBContext context)
+    public OrgLimitRepository(AppDbContext context)
     {
         _context = context;
     }
 
-    public async Task<List<OrgLimits>> GetAllAsync()
+    public async Task<List<OrgLimit>> GetAllAsync()
     {
-        return await _context.OrgLimits.ToListAsync();
+        return await _context.OrgLimit.ToListAsync();
     }
 
-    public async Task<OrgLimits?> GetByIdAsync(Guid id)
+    public async Task<OrgLimit?> GetByIdAsync(string id)
     {
-        return await _context.OrgLimits.FindAsync(id);
+        return await _context.OrgLimit.SingleOrDefaultAsync(x =>x.id == id);
     }
 
-    public async Task<OrgLimits?> CreateAsync(OrgLimits listModel)
+    public async Task<OrgLimit?> CreateAsync(OrgLimit listModel)
     {
-        await _context.OrgLimits.AddAsync(listModel);
+        await _context.OrgLimit.AddAsync(listModel);
         await _context.SaveChangesAsync();
         return listModel;
     }
 
-    public async Task<OrgLimits?> UpdateAsync(Guid id, OrgLimits listModel)
+    public async Task<OrgLimit?> UpdateAsync(string id, OrgLimit listModel)
     {
-        var orgLimit = await _context.OrgLimits.FindAsync(id);
+        var orgLimit = await GetByIdAsync(id);
         
         if (orgLimit is null)
             return null;
         
-        orgLimit.Limit = listModel.Limit;
-        orgLimit.UpdatedAt = listModel.UpdatedAt;
+        orgLimit.count = listModel.count;
+        orgLimit.updatedAt = listModel.updatedAt;
         await _context.SaveChangesAsync();
         return orgLimit;
     }
 
-    public async Task<OrgLimits?> DeleteAsync(Guid id)
+    public async Task<OrgLimit?> DeleteAsync(string id)
     {
-        var orgLimit = await _context.OrgLimits.FindAsync(id);
+        var orgLimit = await GetByIdAsync(id);
         if (orgLimit is null)
             return null;
-        _context.OrgLimits.Remove(orgLimit);
+        
+        _context.OrgLimit.Remove(orgLimit);
         await _context.SaveChangesAsync();
         return orgLimit;
     }
 
-    public Task<bool> ExistAsync(Guid id)
+    public Task<bool> ExistAsync(string id)
     {
-        return _context.OrgLimits.AnyAsync(x => x.Id == id);
+        return _context.OrgLimit.AnyAsync(x => x.id == id);
     }
 }

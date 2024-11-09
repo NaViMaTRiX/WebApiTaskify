@@ -4,10 +4,10 @@ using Models;
 
 public interface IListRepository
 {
-    Task<List<Lists>> GetAllAsync();
-    Task<Lists?> GetByIdAsync(Guid id);
-    Task<Lists?> CreateAsync(Lists listModel); // TODO: Второго параметра нет? Почему?
-    Task<Lists?> UpdateAsync(Guid id, Lists listModel);
-    Task<Lists?> DeleteAsync(Guid id);
-    Task<bool> ExistAsync(Guid id);
+    Task<List<List>> GetAllAsync();
+    Task<List?> GetByIdAsync(string id);
+    Task<List?> CreateAsync(List listModel); // TODO: Второго параметра нет? Почему?
+    Task<List?> UpdateAsync(string id, List listModel);
+    Task<List?> DeleteAsync(string id);
+    Task<bool> ExistAsync(string id);
 }

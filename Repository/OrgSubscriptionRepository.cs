@@ -7,45 +7,45 @@ using Models;
 
 public class OrgSubscriptionRepository : IOrgSubscriptionRepository
 {
-    private readonly AppDBContext _context;
+    private readonly AppDbContext _context;
     
-    public OrgSubscriptionRepository(AppDBContext context)
+    public OrgSubscriptionRepository(AppDbContext context)
     {
         _context = context;
     }
 
 
-    public async Task<List<OrgSubscriptions>> GetAllAsync()
+    public async Task<List<OrgSubscription>> GetAllAsync()
     {
-        return await _context.OrgSubscriptions.ToListAsync();
+        return await _context.OrgSubscription.ToListAsync();
     }
 
-    public async Task<OrgSubscriptions?> GetByIdAsync(Guid id)
+    public async Task<OrgSubscription?> GetByIdAsync(string id)
     {
-        return await _context.OrgSubscriptions.FindAsync(id);
+        return await _context.OrgSubscription.SingleOrDefaultAsync(x => x.id == id);
     }
 
-    public async Task<OrgSubscriptions?> CreateAsync(OrgSubscriptions listModel)
+    public async Task<OrgSubscription?> CreateAsync(OrgSubscription listModel)
     {
-        await _context.OrgSubscriptions.AddAsync(listModel);
+        await _context.OrgSubscription.AddAsync(listModel);
         await _context.SaveChangesAsync();
         return listModel;
     }
 
-    public async Task<OrgSubscriptions?> DeleteAsync(Guid id)
+    public async Task<OrgSubscription?> DeleteAsync(string id)
     {
-        var listModel = _context.OrgSubscriptions.Find(id);
+        var listModel = await GetByIdAsync(id);
 
         if (listModel is null)
             return null;
         
-        _context.OrgSubscriptions.Remove(listModel);
+        _context.OrgSubscription.Remove(listModel);
         await _context.SaveChangesAsync();
         return listModel;
     }
 
-    public async Task<bool> ExistAsync(Guid id)
+    public async Task<bool> ExistAsync(string id)
     {
-        return await _context.OrgSubscriptions.AnyAsync(x => x.Id == id);
+        return await _context.OrgSubscription.AnyAsync(x => x.id == id);
     }
 }

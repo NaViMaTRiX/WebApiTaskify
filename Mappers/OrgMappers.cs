@@ -5,36 +5,36 @@ using Models;
 
 public static class OrgMappers
 {
-    public static OrgLimitDto ToOrgLimitDto(this OrgLimits orgLimit)
+    public static OrgLimitDto ToOrgLimitDto(this OrgLimit orgLimit)
     {
         return new OrgLimitDto
         {
-            Id = orgLimit.Id,
-            OrgId = orgLimit.OrgId,
-            Limit = orgLimit.Limit,
-            UpdatedAt = orgLimit.UpdatedAt,
-            CreatedAt = orgLimit.CreatedAt,
+            Id = orgLimit.id,
+            OrgId = orgLimit.orgId,
+            Limit = orgLimit.count,
+            UpdatedAt = orgLimit.updatedAt,
+            CreatedAt = orgLimit.createdAt,
         };
     }
 
-    public static OrgLimits ToCreateFromOrgLimitDto(this CreateOrgLimitDto createOrgLimitDto, string orgId)
+    public static OrgLimit ToCreateFromOrgLimitDto(this CreateOrgLimitDto createOrgLimitDto, string orgId)
     {
-        return new OrgLimits
+        return new OrgLimit
         {
-            OrgId = orgId,
-            Limit = createOrgLimitDto.Limit,
-            CreatedAt = createOrgLimitDto.CreatedAt,
-            UpdatedAt = createOrgLimitDto.UpdatedAt,
+            id = Guid.NewGuid().ToString(),
+            orgId = orgId,
+            count = createOrgLimitDto.Limit,
+            createdAt = createOrgLimitDto.CreatedAt,
+            updatedAt = createOrgLimitDto.UpdatedAt,
         };
     }
 
-    public static OrgLimits ToCreateFromOrgLimitDto(this UpdateOrgLimitDto updateOrgLimitDto)
+    public static OrgLimit ToUpdateFromOrgLimitDto(this UpdateOrgLimitDto updateOrgLimitDto)
     {
-        return new OrgLimits
+        return new OrgLimit
         {
-            OrgId = updateOrgLimitDto.OrgId,
-            Limit = updateOrgLimitDto.Limit,
-            UpdatedAt = updateOrgLimitDto.UpdatedAt,
+            count = updateOrgLimitDto.Limit,
+            updatedAt = updateOrgLimitDto.UpdatedAt,
         };
     }
 }
