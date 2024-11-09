@@ -38,8 +38,6 @@ public static class AuditLogMappers
             entityId = createAuditLog.EntityId,
             entityTitle = createAuditLog.EntityTitle,
             entityType = createAuditLog.EntityType,
-            createdAt = createAuditLog.CreatedAt,
-            updatedAt = createAuditLog.UpdatedAt
         };
     }
 }

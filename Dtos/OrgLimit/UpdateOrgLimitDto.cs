@@ -6,6 +6,4 @@ public class UpdateOrgLimitDto
 {
     [Required]
     public int Limit { get; set; } = 0;
-    [Required]
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }

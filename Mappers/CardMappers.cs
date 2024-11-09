@@ -34,10 +34,8 @@ public static class CardMappers
             order = createCardDto.Order,
             timer = createCardDto.TimeChecked,
             ready = createCardDto.ReadyChecked,
-            timeStart = createCardDto.CreatedAt,
-            timeEnd = createCardDto.UpdatedAt,
-            createdAt = createCardDto.CreatedAt,
-            updatedAt = createCardDto.UpdatedAt,
+            timeStart = createCardDto.TimeStart,
+            timeEnd = createCardDto.TimeEnd,
         };
     }
 
@@ -52,7 +50,6 @@ public static class CardMappers
             timer = updateCardDto.TimeChecked,
             timeStart = updateCardDto.TimeStart,
             timeEnd = updateCardDto.TimeEnd,
-            updatedAt = updateCardDto.UpdatedAt,
         };
     }
 }

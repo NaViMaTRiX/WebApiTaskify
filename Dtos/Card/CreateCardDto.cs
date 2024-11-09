@@ -21,9 +21,4 @@ public class CreateCardDto
     public bool ReadyChecked { get; set; } //хз
     public DateTime? TimeStart { get; set; }
     public DateTime? TimeEnd { get; set; }
-    
-    [Required]
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    [Required]
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow; // Возможно now будет создавать неполадки. Надо тестить.
 }

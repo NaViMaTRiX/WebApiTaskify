@@ -10,6 +10,6 @@ public class BoardDto
     public string ImageFullUrl { get; set; } = string.Empty;
     public string ImageUserName { get; set; } = string.Empty;
     public string ImageLinkHtml { get; set; } = string.Empty;
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
 }

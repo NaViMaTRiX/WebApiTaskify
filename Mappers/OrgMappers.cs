@@ -24,8 +24,6 @@ public static class OrgMappers
             id = Guid.NewGuid().ToString(),
             orgId = orgId,
             count = createOrgLimitDto.Limit,
-            createdAt = createOrgLimitDto.CreatedAt,
-            updatedAt = createOrgLimitDto.UpdatedAt,
         };
     }
 
@@ -34,7 +32,6 @@ public static class OrgMappers
         return new OrgLimit
         {
             count = updateOrgLimitDto.Limit,
-            updatedAt = updateOrgLimitDto.UpdatedAt,
         };
     }
 }

@@ -11,6 +11,6 @@ public class Card
     public bool ready { get; set; } //хз
     public DateTime? timeStart { get; set; } 
     public DateTime? timeEnd { get; set; }
-    public DateTime createdAt { get; set; } 
-    public DateTime updatedAt { get; set; }
+    public DateTime createdAt { get; set; } = DateTime.UtcNow;
+    public DateTime updatedAt { get; set; } = DateTime.UtcNow;
 }

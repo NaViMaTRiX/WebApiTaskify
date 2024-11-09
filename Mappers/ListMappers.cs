@@ -27,8 +27,6 @@ public static class ListMappers
             boardId = boardId,
             title = createListModel.Title,
             order = createListModel.Order,
-            createdAt = createListModel.CreatedAt,
-            updatedAt = createListModel.UpdatedAt,
         };
     }
 
@@ -38,7 +36,6 @@ public static class ListMappers
         {
             title = updateListModel.Title,
             order = updateListModel.Order,
-            updatedAt = updateListModel.UpdatedAt
         };
     }
 }

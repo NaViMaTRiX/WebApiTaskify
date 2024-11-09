@@ -10,6 +10,4 @@ public class UpdateListDto
     public string Title { get; set; }
     [Required]
     public int Order { get; set; } = 0;
-    [Required]
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }

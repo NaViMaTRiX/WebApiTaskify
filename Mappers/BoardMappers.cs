@@ -34,8 +34,6 @@ public static class BoardMappers
             imageUserName = createBoardModel.ImageUserName,
             imageThumbUrl = createBoardModel.ImageThumbUrl,
             imageLinkHTML = createBoardModel.ImageLinkHtml,
-            createdAt = createBoardModel.CreatedAt,
-            updatedAt = createBoardModel.UpdatedAt,
         };
     }
 

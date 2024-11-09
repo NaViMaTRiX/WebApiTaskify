@@ -17,8 +17,4 @@ public class CreateBoardDto
     public string ImageUserName { get; set; } =string.Empty;
     [Required]
     public string ImageLinkHtml { get; set; } = string.Empty;
-    [Required]
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    [Required]
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }

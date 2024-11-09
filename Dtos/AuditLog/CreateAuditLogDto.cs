@@ -22,8 +22,4 @@ public class CreateAuditLogDto
     public string UserName { get; set; } = String.Empty;
     [Required]
     public string UserImage { get; set; } = String.Empty;
-    [Required]
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    [Required]
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }
