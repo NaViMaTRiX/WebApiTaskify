@@ -19,7 +19,7 @@ public class ListRepository : IListRepository
         return await _context.List.ToListAsync();
     }
 
-    public async Task<List?> GetByIdAsync(string id)
+    public async Task<List?> GetByIdAsync(Guid id)
     {
         return await _context.List.SingleOrDefaultAsync(x => x.id == id);
     }
@@ -31,7 +31,7 @@ public class ListRepository : IListRepository
         return listModel;
     }
 
-    public async Task<List?> UpdateAsync(string id, List listModel)
+    public async Task<List?> UpdateAsync(Guid id, List listModel)
     {
         var list = await GetByIdAsync(id);
         
@@ -47,7 +47,7 @@ public class ListRepository : IListRepository
         return list;
     }
 
-    public async Task<List?> DeleteAsync(string id)
+    public async Task<List?> DeleteAsync(Guid id)
     {
         var list = await GetByIdAsync(id);
         if (list is null)
@@ -58,7 +58,7 @@ public class ListRepository : IListRepository
         return list;
     }
 
-    public async Task<bool> ExistAsync(string id)
+    public async Task<bool> ExistAsync(Guid id)
     {
         return await _context.List.AnyAsync(x => x.id == id);
     }

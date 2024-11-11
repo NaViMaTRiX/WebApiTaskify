@@ -18,7 +18,7 @@ public class CardRepository : ICardRepository
         return await _context.Card.ToListAsync();
     }
 
-    public async Task<Card?> GetByIdAsync(string id)
+    public async Task<Card?> GetByIdAsync(Guid id)
     {
         return await _context.Card.SingleOrDefaultAsync(x => x.id == id);
     }
@@ -30,7 +30,7 @@ public class CardRepository : ICardRepository
         return cardModel;
     }
 
-    public async Task<Card?> UpdateAsync(string id, Card cardModel)
+    public async Task<Card?> UpdateAsync(Guid id, Card cardModel)
     {
         var checkCard = await GetByIdAsync(id);
         if(checkCard is null)
@@ -48,7 +48,7 @@ public class CardRepository : ICardRepository
         return checkCard;
     }
 
-    public async Task<Card?> DeleteAsync(string id)
+    public async Task<Card?> DeleteAsync(Guid id)
     {
         var checkCard = await GetByIdAsync(id);
         if(checkCard is null)
@@ -58,7 +58,7 @@ public class CardRepository : ICardRepository
         return checkCard;
     }
 
-    public  Task<bool> ExistAsync(string id)
+    public  Task<bool> ExistAsync(Guid id)
     {
         return _context.Card.AnyAsync(x=>x.id == id);
     }

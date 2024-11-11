@@ -17,8 +17,8 @@ public static class BoardMappers
             ImageUserName = boardModel.imageUserName,
             ImageThumbUrl = boardModel.imageThumbUrl,
             ImageLinkHtml = boardModel.imageLinkHTML,
-            CreatedAt = boardModel.createdAt,
-            UpdatedAt = boardModel.updatedAt,
+            createdAt = boardModel.createdAt,
+            updatedAt = boardModel.updatedAt,
         };
     }
 
@@ -26,7 +26,7 @@ public static class BoardMappers
     {
         return new Board
         {
-            id = Guid.NewGuid().ToString(),
+            id = Guid.NewGuid(),
             orgId = orgId,
             title = createBoardModel.Title,
             imageId = createBoardModel.ImageId,

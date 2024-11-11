@@ -20,8 +20,8 @@ public static class AuditLogMappers
             EntityId = auditLog.entityId,
             EntityTitle = auditLog.entityTitle,
             EntityType = auditLog.entityType,
-            CreatedAt = auditLog.createdAt,
-            UpdatedAt = auditLog.updatedAt
+            createdAt = auditLog.createdAt,
+            updatedAt = auditLog.updatedAt
         };
     }
 
@@ -29,7 +29,7 @@ public static class AuditLogMappers
     {
         return new AuditLog
         {
-            id = Guid.NewGuid().ToString(),
+            id = Guid.NewGuid(),
             orgId = createAuditLog.OrgId,
             userId = createAuditLog.UserId,
             userName = createAuditLog.UserName,

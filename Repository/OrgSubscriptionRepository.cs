@@ -20,7 +20,7 @@ public class OrgSubscriptionRepository : IOrgSubscriptionRepository
         return await _context.OrgSubscription.ToListAsync();
     }
 
-    public async Task<OrgSubscription?> GetByIdAsync(string id)
+    public async Task<OrgSubscription?> GetByIdAsync(Guid id)
     {
         return await _context.OrgSubscription.SingleOrDefaultAsync(x => x.id == id);
     }
@@ -32,7 +32,7 @@ public class OrgSubscriptionRepository : IOrgSubscriptionRepository
         return listModel;
     }
 
-    public async Task<OrgSubscription?> DeleteAsync(string id)
+    public async Task<OrgSubscription?> DeleteAsync(Guid id)
     {
         var listModel = await GetByIdAsync(id);
 
@@ -44,7 +44,7 @@ public class OrgSubscriptionRepository : IOrgSubscriptionRepository
         return listModel;
     }
 
-    public async Task<bool> ExistAsync(string id)
+    public async Task<bool> ExistAsync(Guid id)
     {
         return await _context.OrgSubscription.AnyAsync(x => x.id == id);
     }

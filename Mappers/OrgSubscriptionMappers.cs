@@ -22,7 +22,7 @@ public static class OrgSubscriptionMappers
     {
         return new OrgSubscription
         {
-            id = Guid.NewGuid().ToString(),
+            id = Guid.NewGuid(),
             orgId = orgId,
             stripe_price_id = createOrgSubscription.StripePriseId,
             stripe_customer_id = createOrgSubscription.StripeCustomerId,

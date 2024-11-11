@@ -26,8 +26,8 @@ public class OrgLimitController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(string id)
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> GetById(Guid id)
     {
         if(!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -54,8 +54,8 @@ public class OrgLimitController : ControllerBase
         return CreatedAtAction(nameof(GetById), new {id = orgLimit.id}, orgLimit.ToOrgLimitDto());
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> Update([FromBody] UpdateOrgLimitDto updateOrgLimitDto, string id)
+    [HttpPut("{id:guid}")]
+    public async Task<IActionResult> Update([FromBody] UpdateOrgLimitDto updateOrgLimitDto, Guid id)
     {
         if(!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -70,7 +70,7 @@ public class OrgLimitController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(string id)
+    public async Task<IActionResult> Delete(Guid id)
     {
         if(!ModelState.IsValid)
             return BadRequest(ModelState);

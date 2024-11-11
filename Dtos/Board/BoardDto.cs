@@ -1,15 +1,15 @@
-﻿namespace WebApiTaskify.Dtos.Board;
+﻿using WebApiTaskify.Models.Libs;
 
-public class BoardDto
+namespace WebApiTaskify.Dtos.Board;
+
+public class BoardDto : BaseModel
 {
-    public string Id { get; set; } = string.Empty;
-    public string OrgId { get; set; } = string.Empty;
+    public Guid Id { get; set; }
+    public string OrgId { get; set; }
     public string Title { get; set; } = string.Empty;
     public string ImageId { get; set; } = string.Empty;
     public string ImageThumbUrl { get; set; } = string.Empty;
     public string ImageFullUrl { get; set; } = string.Empty;
     public string ImageUserName { get; set; } = string.Empty;
     public string ImageLinkHtml { get; set; } = string.Empty;
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
 }

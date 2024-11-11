@@ -29,8 +29,8 @@ public class ListController : ControllerBase
         return Ok(lists);
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(string id)
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> GetById(Guid id)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -42,8 +42,8 @@ public class ListController : ControllerBase
         return Ok(list.ToListDto());
     }
 
-    [HttpPost("{boardId}")]
-    public async Task<IActionResult> Create([FromRoute] string boardId, [FromBody] CreateListDto createListDto)
+    [HttpPost("{boardId:guid}")]
+    public async Task<IActionResult> Create([FromRoute] Guid boardId, [FromBody] CreateListDto createListDto)
     {
          if (!ModelState.IsValid)
              return BadRequest(ModelState);
@@ -62,7 +62,7 @@ public class ListController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(string id, [FromBody] UpdateListDto updateListDto)
+    public async Task<IActionResult> Update(Guid id, [FromBody] UpdateListDto updateListDto)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -76,7 +76,7 @@ public class ListController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(string id) //TODO: make full delete list with all cards
+    public async Task<IActionResult> Delete(Guid id) //TODO: make full delete list with all cards
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);

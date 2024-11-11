@@ -27,8 +27,8 @@ public class AuditLogController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(string id)
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> GetById(Guid id)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -55,8 +55,8 @@ public class AuditLogController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = auditLog.id }, auditLog.ToAuditLogDto());
     }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(string id)
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Delete(Guid id)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);

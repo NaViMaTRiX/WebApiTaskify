@@ -30,7 +30,7 @@ public class CardController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(string id)
+    public async Task<IActionResult> GetById(Guid id)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -42,8 +42,8 @@ public class CardController : ControllerBase
         return Ok(card.ToCardDto());
     }
 
-    [HttpPost("{listId}")]
-    public async Task<IActionResult> Create([FromBody] CreateCardDto createCardDto, string listId)
+    [HttpPost("{listId:guid}")]
+    public async Task<IActionResult> Create([FromBody] CreateCardDto createCardDto, Guid listId)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -60,8 +60,8 @@ public class CardController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = card.id }, card.ToCardDto());
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> Update([FromBody] UpdateCardDto updateCardDto, string id)
+    [HttpPut("{id:guid}")]
+    public async Task<IActionResult> Update([FromBody] UpdateCardDto updateCardDto, Guid id)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -74,8 +74,8 @@ public class CardController : ControllerBase
         return Ok(cardModel.ToCardDto());
     }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(string id)
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Delete(Guid id)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);

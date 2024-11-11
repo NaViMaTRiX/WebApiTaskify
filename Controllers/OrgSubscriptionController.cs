@@ -28,7 +28,7 @@ public class OrgSubscriptionController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(string id)
+    public async Task<IActionResult> GetById(Guid id)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -58,7 +58,7 @@ public class OrgSubscriptionController : ControllerBase
     //[HttpPut("{id:guid}")]
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(string id)
+    public async Task<IActionResult> Delete(Guid id)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);

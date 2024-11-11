@@ -1,12 +1,12 @@
-﻿namespace WebApiTaskify.Dtos.List;
+﻿using WebApiTaskify.Models.Libs;
 
-public class ListDto
+namespace WebApiTaskify.Dtos.List;
+
+public class ListDto : BaseModel
 {
-    public string Id { get; set; } = string.Empty;
-    public string Title { get; set; } = string.Empty;
-    public int Order { get; set; } = 0;
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
-    public string BoardId { get; set; } = string.Empty;
+    public Guid Id { get; set; } 
+    public Guid BoardId { get; set; } 
+    public string Title { get; set; } 
+    public int Order { get; set; } 
 
 }

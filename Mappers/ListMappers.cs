@@ -10,20 +10,22 @@ public static class ListMappers
         return new ListDto
         {
             Id = listModel.id,
+            BoardId = listModel.boardId,
             Title = listModel.title,
             Order = listModel.order,
-            CreatedAt = listModel.createdAt,
-            UpdatedAt = listModel.updatedAt,
-            BoardId = listModel.boardId,
+            createdAt = listModel.createdAt,
+            updatedAt = listModel.updatedAt,
+            createdBy = listModel.createdBy,
+            updatedBy = listModel.updatedBy, // TODO: сделать вот это везде
         };
     }
 
     // изпользуется для ввода данных на форму
-    public static List ToListFromCreate(this CreateListDto createListModel, string boardId)
+    public static List ToListFromCreate(this CreateListDto createListModel, Guid boardId)
     {
         return new List
         {
-            id = Guid.NewGuid().ToString(),
+            id = Guid.NewGuid(),
             boardId = boardId,
             title = createListModel.Title,
             order = createListModel.Order,

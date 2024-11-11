@@ -1,10 +1,10 @@
-﻿namespace WebApiTaskify.Dtos.OrgLimit;
+﻿using WebApiTaskify.Models.Libs;
 
-public class OrgLimitDto
+namespace WebApiTaskify.Dtos.OrgLimit;
+
+public class OrgLimitDto : BaseModel
 {
-    public string Id { get; set; } = string.Empty;
-    public string OrgId { get; set; } = string.Empty;
+    public Guid Id { get; set; }
+    public string OrgId { get; set; }
     public int Limit { get; set; }
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }

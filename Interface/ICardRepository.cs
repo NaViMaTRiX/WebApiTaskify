@@ -5,9 +5,9 @@ using Models;
 public interface ICardRepository
 {
     Task<List<Card>> GetAllAsync();
-    Task<Card?> GetByIdAsync(string id);
+    Task<Card?> GetByIdAsync(Guid id);
     Task<Card?> CreateAsync(Card cardModel);
-    Task<Card?> UpdateAsync(string id, Card cardModel);
-    Task<Card?> DeleteAsync(string id);
-    Task<bool> ExistAsync(string id);
+    Task<Card?> UpdateAsync(Guid id, Card cardModel);
+    Task<Card?> DeleteAsync(Guid id);
+    Task<bool> ExistAsync(Guid id);
 }

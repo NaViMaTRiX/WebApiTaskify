@@ -23,11 +23,11 @@ public static class CardMappers
         };
     }
 
-    public static Card ToCardFromCreate(this CreateCardDto createCardDto, string listId)
+    public static Card ToCardFromCreate(this CreateCardDto createCardDto, Guid listId)
     {
         return new Card
         {
-            id = Guid.NewGuid().ToString(),
+            id = Guid.NewGuid(),
             listId = listId,
             title = createCardDto.Title,
             description = createCardDto.Description,

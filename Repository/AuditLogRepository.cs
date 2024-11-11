@@ -19,7 +19,7 @@ public class AuditLogRepository : IAuditLogRepository
         return await _context.AuditLog.ToListAsync();
     }
 
-    public async Task<AuditLog?> GetByIdAsync(string id)
+    public async Task<AuditLog?> GetByIdAsync(Guid id)
     {
         return await _context.AuditLog.SingleOrDefaultAsync(x => x.id == id);
     }
@@ -31,7 +31,7 @@ public class AuditLogRepository : IAuditLogRepository
         return boardsModel;
     }
 
-    public async Task<AuditLog?> DeleteAsync(string id)
+    public async Task<AuditLog?> DeleteAsync(Guid id)
     {
         var audit = await _context.AuditLog.SingleOrDefaultAsync(x => x.id == id);
         if (audit is null)
@@ -42,7 +42,7 @@ public class AuditLogRepository : IAuditLogRepository
         return audit;
     }
 
-    public async Task<bool> ExistAsync(string id)
+    public async Task<bool> ExistAsync(Guid id)
     {
         return await _context.AuditLog.AnyAsync(x => x.id == id);
     }

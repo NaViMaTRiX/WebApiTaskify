@@ -19,7 +19,7 @@ public class OrgLimitRepository : IOrgLimitRepository
         return await _context.OrgLimit.ToListAsync();
     }
 
-    public async Task<OrgLimit?> GetByIdAsync(string id)
+    public async Task<OrgLimit?> GetByIdAsync(Guid id)
     {
         return await _context.OrgLimit.SingleOrDefaultAsync(x =>x.id == id);
     }
@@ -31,7 +31,7 @@ public class OrgLimitRepository : IOrgLimitRepository
         return listModel;
     }
 
-    public async Task<OrgLimit?> UpdateAsync(string id, OrgLimit listModel)
+    public async Task<OrgLimit?> UpdateAsync(Guid id, OrgLimit listModel)
     {
         var orgLimit = await GetByIdAsync(id);
         
@@ -44,7 +44,7 @@ public class OrgLimitRepository : IOrgLimitRepository
         return orgLimit;
     }
 
-    public async Task<OrgLimit?> DeleteAsync(string id)
+    public async Task<OrgLimit?> DeleteAsync(Guid id)
     {
         var orgLimit = await GetByIdAsync(id);
         if (orgLimit is null)
@@ -55,7 +55,7 @@ public class OrgLimitRepository : IOrgLimitRepository
         return orgLimit;
     }
 
-    public Task<bool> ExistAsync(string id)
+    public Task<bool> ExistAsync(Guid id)
     {
         return _context.OrgLimit.AnyAsync(x => x.id == id);
     }

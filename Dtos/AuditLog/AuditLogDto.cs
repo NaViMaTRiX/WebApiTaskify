@@ -1,10 +1,11 @@
 ﻿using WebApiTaskify.Models.Enum;
+using WebApiTaskify.Models.Libs;
 
 namespace WebApiTaskify.Dtos.AuditLog;
 
-public class AuditLogDto
+public class AuditLogDto : BaseModel
 {
-    public string Id { get; set; }
+    public Guid Id { get; set; }
     public string OrgId { get; set; }
     public ACTION Action { get; set; }
     public string EntityId { get; set; }
@@ -13,6 +14,4 @@ public class AuditLogDto
     public string UserId { get; set; }
     public string UserName { get; set; }
     public string UserImage { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
 }

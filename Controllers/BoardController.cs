@@ -27,8 +27,8 @@ public class BoardController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetById([FromRoute] string id)
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> GetById([FromRoute] Guid id)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -57,8 +57,8 @@ public class BoardController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = board.id }, board.ToBoardDto());
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> Update([FromRoute] string id, [FromBody] UpdateBoardDto boardDto)
+    [HttpPut("{id:guid}")]
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateBoardDto boardDto)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -71,8 +71,8 @@ public class BoardController : ControllerBase
         return Ok(boardModel.ToBoardDto());
     }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete([FromRoute] string id)
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Delete([FromRoute] Guid id)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);

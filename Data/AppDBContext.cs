@@ -13,6 +13,7 @@ public class AppDbContext : DbContext
     public DbSet<Board> Board { get; set; }
     public DbSet<List> List { get; set; }
     public DbSet<Card> Card { get; set; }
+    public DbSet<Organization> Organization { get; set; }
     public DbSet<AuditLog> AuditLog { get; set; }
     public DbSet<OrgLimit> OrgLimit { get; set; }
     public DbSet<OrgSubscription> OrgSubscription { get; set; }
