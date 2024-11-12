@@ -21,7 +21,9 @@ public static class AuditLogMappers
             EntityTitle = auditLog.entityTitle,
             EntityType = auditLog.entityType,
             createdAt = auditLog.createdAt,
-            updatedAt = auditLog.updatedAt
+            updatedAt = auditLog.updatedAt,
+            createdBy = auditLog.createdBy,
+            updatedBy = auditLog.updatedBy,
         };
     }
 

@@ -14,6 +14,8 @@ public static class OrgMappers
             Limit = orgLimit.count,
             updatedAt = orgLimit.updatedAt,
             createdAt = orgLimit.createdAt,
+            updatedBy = orgLimit.updatedBy,
+            createdBy = orgLimit.createdBy,
         };
     }
 

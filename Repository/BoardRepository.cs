@@ -5,36 +5,34 @@ using Interface;
 using Microsoft.EntityFrameworkCore;
 using Models;
 
-public class BoardRepository : IBoardRepository
+public class BoardRepository(AppDbContext context) : IBoardRepository
 {
-    private readonly AppDbContext _context;
-
-    public BoardRepository(AppDbContext context)
-    {
-        _context = context;
-    }
-
     public async Task<List<Board>> GetAllAsync(CancellationToken token)
     {
-        return await _context.Board.Include(x => x.Lists).ToListAsync(token);;
+        return await context.Board.Include(x => x.Lists).ToListAsync(token);;
     }
 
     public async Task<Board?> GetByIdAsync(Guid id, CancellationToken token)
     {
-         var board =  await _context.Board
+         var board =  await context.Board
             .Include(x => x.Lists)
             .FirstOrDefaultAsync(x => x.id == id, token);
          return board;
     }
 
+    public Task<Board?> GetAllByOrgIdAsync(string orgId, CancellationToken token)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<Board?> CreateAsync(string orgId, Board boardModel, CancellationToken token)
     {
-        var objOrgId = await _context.Board.SingleOrDefaultAsync(x => x.orgId == orgId, token);
+        var objOrgId = await context.Board.SingleOrDefaultAsync(x => x.orgId == orgId, token);
         if (objOrgId is null)
             return null;
         
-        await _context.Board.AddAsync(boardModel, token);
-        await _context.SaveChangesAsync(token);
+        await context.Board.AddAsync(boardModel, token);
+        await context.SaveChangesAsync(token);
         return boardModel;
     }
 
@@ -54,7 +52,7 @@ public class BoardRepository : IBoardRepository
         board.imageLinkHTML = boardModel.imageLinkHTML;
         board.updatedAt = boardModel.updatedAt;
         
-        await _context.SaveChangesAsync();
+        await context.SaveChangesAsync();
         return board;
     }
 
@@ -65,13 +63,13 @@ public class BoardRepository : IBoardRepository
         if (board is null)
             return null;
         
-        _context.Board.Remove(board);
-        await _context.SaveChangesAsync(token);
+        context.Board.Remove(board);
+        await context.SaveChangesAsync(token);
         return board;
     }
 
     public Task<bool> ExistAsync(Guid id, CancellationToken token)
     {
-        return _context.Board.AnyAsync(x => x.id == id, token);
+        return context.Board.AnyAsync(x => x.id == id, token);
     }
 }

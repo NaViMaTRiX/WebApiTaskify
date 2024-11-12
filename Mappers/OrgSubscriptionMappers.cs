@@ -15,6 +15,10 @@ public static class OrgSubscriptionMappers
             StripeCustomerId = orgSubscription.stripe_customer_id,
             StripeSubscriptionId = orgSubscription.stripe_subscription_id,
             StripeCurrentPeriodEnd = orgSubscription.stripe_current_period_end,
+            createdBy = orgSubscription.createdBy,
+            updatedBy = orgSubscription.updatedBy,
+            createdAt = orgSubscription.createdAt,
+            updatedAt = orgSubscription.updatedAt,
         };
     }
 

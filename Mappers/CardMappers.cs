@@ -19,7 +19,9 @@ public static class CardMappers
             timeEnd = cardDto.timeEnd,
             timeChecked = cardDto.timer,
             createdAt = cardDto.createdAt,
-            updatedAt = cardDto.updatedAt
+            updatedAt = cardDto.updatedAt,
+            updatedBy = cardDto.updatedBy,
+            createdBy = cardDto.createdBy,
         };
     }
 

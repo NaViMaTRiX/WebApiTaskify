@@ -20,6 +20,8 @@ public static class BoardMappers
             ImageLinkHtml = boardModel.imageLinkHTML,
             createdAt = boardModel.createdAt,
             updatedAt = boardModel.updatedAt,
+            updatedBy = boardModel.updatedBy,
+            createdBy = boardModel.createdBy,
         };
     }
 
