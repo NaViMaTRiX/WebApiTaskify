@@ -1,4 +1,5 @@
-﻿using WebApiTaskify.Models.Libs;
+﻿using WebApiTaskify.Dtos.List;
+using WebApiTaskify.Models.Libs;
 
 namespace WebApiTaskify.Dtos.Board;
 
@@ -12,4 +13,5 @@ public class BoardDto : BaseModel
     public string ImageFullUrl { get; set; } = string.Empty;
     public string ImageUserName { get; set; } = string.Empty;
     public string ImageLinkHtml { get; set; } = string.Empty;
+    public ICollection<ListDto?> Lists { get; set; } = new List<ListDto?>();
 }

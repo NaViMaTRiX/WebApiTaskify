@@ -9,7 +9,5 @@ public class List : BaseModel
     public string title { get; set; }
     public int order { get; set; }
     
-    
-    public List<Card> cards { get; set; } = new List<Card>();
-    
+    public ICollection<Card?> cards { get; set; }
 }

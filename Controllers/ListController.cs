@@ -7,35 +7,27 @@ using Microsoft.AspNetCore.Mvc;
 
 [Route("api/v{version:apiVersion}/list")]
 [ApiController]
-public class ListController : ControllerBase
+public class ListController(IListRepository listRepository, IBoardRepository boardRepository)
+    : ControllerBase
 {
-    private readonly IListRepository _listRepository;
-    private readonly IBoardRepository _boardRepository;
-
-    public ListController(IListRepository listRepository, IBoardRepository boardRepository)
-    {
-        _listRepository = listRepository;
-        _boardRepository = boardRepository;
-    }
-
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll(CancellationToken token)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var lists = await _listRepository.GetAllAsync(); 
+        var lists = await listRepository.GetAllAsync(token); 
         var result = lists.Select(x => x.ToListDto());
         return Ok(lists);
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<IActionResult> GetById(Guid id)
+    public async Task<IActionResult> GetById(Guid id, CancellationToken token)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var list = await _listRepository.GetByIdAsync(id);
+        var list = await listRepository.GetByIdAsync(id, token);
         if (list is null)
             return NotFound();
 
@@ -43,18 +35,18 @@ public class ListController : ControllerBase
     }
 
     [HttpPost("{boardId:guid}")]
-    public async Task<IActionResult> Create([FromRoute] Guid boardId, [FromBody] CreateListDto createListDto)
+    public async Task<IActionResult> Create([FromRoute] Guid boardId, [FromBody] CreateListDto createListDto, CancellationToken token)
     {
          if (!ModelState.IsValid)
              return BadRequest(ModelState);
 
-         if (!await _boardRepository.ExistAsync(boardId))
+         if (!await boardRepository.ExistAsync(boardId, token))
          {
              return BadRequest(ModelState);
          }
 
          var listModel = createListDto.ToListFromCreate(boardId);
-         var list = await _listRepository.CreateAsync(listModel);
+         var list = await listRepository.CreateAsync(listModel, token);
          
          if (list is null)
              return BadRequest("Failed to create list");
@@ -62,12 +54,12 @@ public class ListController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(Guid id, [FromBody] UpdateListDto updateListDto)
+    public async Task<IActionResult> Update(Guid id, [FromBody] UpdateListDto updateListDto, CancellationToken token)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         
-        var checkList = await _listRepository.UpdateAsync(id, updateListDto.ToListFromUpdate());
+        var checkList = await listRepository.UpdateAsync(id, updateListDto.ToListFromUpdate(), token);
         
         if (checkList is null)
             return NotFound("List not found");
@@ -76,12 +68,12 @@ public class ListController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(Guid id) //TODO: make full delete list with all cards
+    public async Task<IActionResult> Delete(Guid id, CancellationToken token) //TODO: make full delete list with all cards
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         
-        var checkList = await _listRepository.DeleteAsync(id);
+        var checkList = await listRepository.DeleteAsync(id, token);
         
         if (checkList is null)
             return NotFound("List not found");

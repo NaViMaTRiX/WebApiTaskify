@@ -1,4 +1,5 @@
-﻿using WebApiTaskify.Models.Libs;
+﻿using System.Text.Json.Serialization;
+using WebApiTaskify.Models.Libs;
 
 namespace WebApiTaskify.Models;
 

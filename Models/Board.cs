@@ -13,5 +13,5 @@ public class Board : BaseModel
     public string imageUserName { get; set; } 
     public string imageLinkHTML { get; set; }
     
-    public List<List> Lists { get; set; } = new List<List>();
+    public ICollection<List?> Lists { get; set; }
 }

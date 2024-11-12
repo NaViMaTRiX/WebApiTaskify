@@ -16,23 +16,23 @@ public class OrgLimitController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll(CancellationToken token)
     {
         if(!ModelState.IsValid)
             return BadRequest(ModelState);
         
-        var orgLimits = await _orgLimitRepository.GetAllAsync();                                 
+        var orgLimits = await _orgLimitRepository.GetAllAsync(token);                                 
         var result = orgLimits.Select(x => x.ToOrgLimitDto());
         return Ok(result);
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<IActionResult> GetById(Guid id)
+    public async Task<IActionResult> GetById(Guid id, CancellationToken token)
     {
         if(!ModelState.IsValid)
             return BadRequest(ModelState);
         
-        var orgLimit = await _orgLimitRepository.GetByIdAsync(id);
+        var orgLimit = await _orgLimitRepository.GetByIdAsync(id, token);
         
         if(orgLimit is null)
             return NotFound("Organization count not found");
@@ -41,13 +41,13 @@ public class OrgLimitController : ControllerBase
     }
 
     [HttpPost("{orgId}")]
-    public async Task<IActionResult> Create([FromBody] CreateOrgLimitDto createOrgLimitDto, string orgId)
+    public async Task<IActionResult> Create([FromBody] CreateOrgLimitDto createOrgLimitDto, string orgId, CancellationToken token)
     {
         if(!ModelState.IsValid)
             return BadRequest(ModelState);
 
         var orgLimitModel = createOrgLimitDto.ToCreateFromOrgLimitDto(orgId);
-        var orgLimit = await _orgLimitRepository.CreateAsync(orgLimitModel);
+        var orgLimit = await _orgLimitRepository.CreateAsync(orgLimitModel, token);
         
         if(orgLimit is null)
             return BadRequest("Organization count could not be created");
@@ -55,13 +55,13 @@ public class OrgLimitController : ControllerBase
     }
 
     [HttpPut("{id:guid}")]
-    public async Task<IActionResult> Update([FromBody] UpdateOrgLimitDto updateOrgLimitDto, Guid id)
+    public async Task<IActionResult> Update([FromBody] UpdateOrgLimitDto updateOrgLimitDto, Guid id, CancellationToken token)
     {
         if(!ModelState.IsValid)
             return BadRequest(ModelState);
 
         var orgLimit = updateOrgLimitDto.ToUpdateFromOrgLimitDto();
-        var result = await _orgLimitRepository.UpdateAsync(id, orgLimit);
+        var result = await _orgLimitRepository.UpdateAsync(id, orgLimit, token);
         
         if(result is null)
             return NotFound("Organization count not found");
@@ -70,12 +70,12 @@ public class OrgLimitController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(Guid id)
+    public async Task<IActionResult> Delete(Guid id, CancellationToken token)
     {
         if(!ModelState.IsValid)
             return BadRequest(ModelState);
         
-        var result = await _orgLimitRepository.DeleteAsync(id);
+        var result = await _orgLimitRepository.DeleteAsync(id, token);
         if(result is null)
             return NotFound("Organization count not found");
         

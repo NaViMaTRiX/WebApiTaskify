@@ -13,6 +13,22 @@ public static class ListMappers
             BoardId = listModel.boardId,
             Title = listModel.title,
             Order = listModel.order,
+            Cards = listModel.cards.Select(x => x?.ToCardDto()).ToList(),
+            createdAt = listModel.createdAt,
+            updatedAt = listModel.updatedAt,
+            createdBy = listModel.createdBy,
+            updatedBy = listModel.updatedBy, // TODO: сделать вот это везде
+        };
+    }
+    
+    public static ListDto ToBoardWithListDto(this List listModel) // изпользуется длЯ вывода данных на страницу
+    {
+        return new ListDto
+        {
+            Id = listModel.id,
+            BoardId = listModel.boardId,
+            Title = listModel.title,
+            Order = listModel.order,
             createdAt = listModel.createdAt,
             updatedAt = listModel.updatedAt,
             createdBy = listModel.createdBy,

@@ -17,23 +17,23 @@ public class OrgSubscriptionController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll(CancellationToken token)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         
-        var orgSubscriptions = await _orgSubscriptionRepository.GetAllAsync();
+        var orgSubscriptions = await _orgSubscriptionRepository.GetAllAsync(token);
         var result = orgSubscriptions.Select(x => x.ToOrgSubscriptionDto());
         return Ok(orgSubscriptions);
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(Guid id)
+    public async Task<IActionResult> GetById(Guid id, CancellationToken token)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         
-        var orgSubscription = await _orgSubscriptionRepository.GetByIdAsync(id);
+        var orgSubscription = await _orgSubscriptionRepository.GetByIdAsync(id, token);
         if (orgSubscription is null)
             return NotFound("OrgSubscription not found");
         
@@ -41,13 +41,13 @@ public class OrgSubscriptionController : ControllerBase
     }
 
     [HttpPost("{orgId}")]
-    public async Task<IActionResult> Create([FromBody] CreateOrgSubscriptionDto createOrgSubscriptionDto, string orgId)
+    public async Task<IActionResult> Create([FromBody] CreateOrgSubscriptionDto createOrgSubscriptionDto, string orgId, CancellationToken token)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         
         var orgSubscription = createOrgSubscriptionDto.ToOrgSubscriptionDtoFromCreate(orgId);
-        var result = await _orgSubscriptionRepository.CreateAsync(orgSubscription);
+        var result = await _orgSubscriptionRepository.CreateAsync(orgSubscription, token);
         
         if (result is null)
             return BadRequest("Failed to create orgSubscription");
@@ -58,12 +58,12 @@ public class OrgSubscriptionController : ControllerBase
     //[HttpPut("{id:guid}")]
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(Guid id)
+    public async Task<IActionResult> Delete(Guid id, CancellationToken token)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         
-        var orgSubscription = await _orgSubscriptionRepository.DeleteAsync(id);
+        var orgSubscription = await _orgSubscriptionRepository.DeleteAsync(id, token);
         
         if (orgSubscription is null)
             return NotFound("OrgSubscription not found");

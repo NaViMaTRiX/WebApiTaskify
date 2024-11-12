@@ -13,26 +13,26 @@ public class CardRepository : ICardRepository
     {
         _context = context;
     }
-    public async Task<List<Card>> GetAllAsync()
+    public async Task<List<Card>> GetAllAsync(CancellationToken token)
     {
-        return await _context.Card.ToListAsync();
+        return await _context.Card.ToListAsync(token);
     }
 
-    public async Task<Card?> GetByIdAsync(Guid id)
+    public async Task<Card?> GetByIdAsync(Guid id, CancellationToken token)
     {
-        return await _context.Card.SingleOrDefaultAsync(x => x.id == id);
+        return await _context.Card.SingleOrDefaultAsync(x => x.id == id, token);
     }
 
-    public async Task<Card?> CreateAsync(Card cardModel)
+    public async Task<Card?> CreateAsync(Card cardModel, CancellationToken token)
     {
-        await _context.Card.AddAsync(cardModel);
-        await _context.SaveChangesAsync();
+        await _context.Card.AddAsync(cardModel, token);
+        await _context.SaveChangesAsync(token);
         return cardModel;
     }
 
-    public async Task<Card?> UpdateAsync(Guid id, Card cardModel)
+    public async Task<Card?> UpdateAsync(Guid id, Card cardModel, CancellationToken token)
     {
-        var checkCard = await GetByIdAsync(id);
+        var checkCard = await GetByIdAsync(id, token);
         if(checkCard is null)
             return null;
         
@@ -44,22 +44,22 @@ public class CardRepository : ICardRepository
         checkCard.timeEnd = cardModel.timeEnd;
         checkCard.ready = cardModel.ready;
         checkCard.updatedAt = cardModel.updatedAt;
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(token);
         return checkCard;
     }
 
-    public async Task<Card?> DeleteAsync(Guid id)
+    public async Task<Card?> DeleteAsync(Guid id, CancellationToken token)
     {
-        var checkCard = await GetByIdAsync(id);
+        var checkCard = await GetByIdAsync(id, token);
         if(checkCard is null)
             return null;
         _context.Card.Remove(checkCard);
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(token);
         return checkCard;
     }
 
-    public  Task<bool> ExistAsync(Guid id)
+    public  Task<bool> ExistAsync(Guid id, CancellationToken token)
     {
-        return _context.Card.AnyAsync(x=>x.id == id);
+        return _context.Card.AnyAsync(x=>x.id == id, token);
     }
 }

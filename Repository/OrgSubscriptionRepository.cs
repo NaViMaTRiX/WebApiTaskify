@@ -15,37 +15,37 @@ public class OrgSubscriptionRepository : IOrgSubscriptionRepository
     }
 
 
-    public async Task<List<OrgSubscription>> GetAllAsync()
+    public async Task<List<OrgSubscription>> GetAllAsync(CancellationToken token)
     {
-        return await _context.OrgSubscription.ToListAsync();
+        return await _context.OrgSubscription.ToListAsync(token);
     }
 
-    public async Task<OrgSubscription?> GetByIdAsync(Guid id)
+    public async Task<OrgSubscription?> GetByIdAsync(Guid id, CancellationToken token)
     {
-        return await _context.OrgSubscription.SingleOrDefaultAsync(x => x.id == id);
+        return await _context.OrgSubscription.SingleOrDefaultAsync(x => x.id == id, token);
     }
 
-    public async Task<OrgSubscription?> CreateAsync(OrgSubscription listModel)
+    public async Task<OrgSubscription?> CreateAsync(OrgSubscription listModel, CancellationToken token)
     {
-        await _context.OrgSubscription.AddAsync(listModel);
-        await _context.SaveChangesAsync();
+        await _context.OrgSubscription.AddAsync(listModel, token);
+        await _context.SaveChangesAsync(token);
         return listModel;
     }
 
-    public async Task<OrgSubscription?> DeleteAsync(Guid id)
+    public async Task<OrgSubscription?> DeleteAsync(Guid id, CancellationToken token)
     {
-        var listModel = await GetByIdAsync(id);
+        var listModel = await GetByIdAsync(id, token);
 
         if (listModel is null)
             return null;
         
         _context.OrgSubscription.Remove(listModel);
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(token);
         return listModel;
     }
 
-    public async Task<bool> ExistAsync(Guid id)
+    public async Task<bool> ExistAsync(Guid id, CancellationToken token)
     {
-        return await _context.OrgSubscription.AnyAsync(x => x.id == id);
+        return await _context.OrgSubscription.AnyAsync(x => x.id == id, token);
     }
 }

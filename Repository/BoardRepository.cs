@@ -14,30 +14,33 @@ public class BoardRepository : IBoardRepository
         _context = context;
     }
 
-    public async Task<List<Board>> GetAllAsync()
+    public async Task<List<Board>> GetAllAsync(CancellationToken token)
     {
-        return await _context.Board.ToListAsync();
+        return await _context.Board.Include(x => x.Lists).ToListAsync(token);;
     }
 
-    public async Task<Board?> GetByIdAsync(Guid id)
+    public async Task<Board?> GetByIdAsync(Guid id, CancellationToken token)
     {
-        return await _context.Board.SingleOrDefaultAsync(x => x.id == id);
+         var board =  await _context.Board
+            .Include(x => x.Lists)
+            .FirstOrDefaultAsync(x => x.id == id, token);
+         return board;
     }
 
-    public async Task<Board?> CreateAsync(string orgId, Board boardModel)
+    public async Task<Board?> CreateAsync(string orgId, Board boardModel, CancellationToken token)
     {
-        var objOrgId = await _context.Board.SingleOrDefaultAsync(x => x.orgId == orgId);
+        var objOrgId = await _context.Board.SingleOrDefaultAsync(x => x.orgId == orgId, token);
         if (objOrgId is null)
             return null;
         
-        await _context.Board.AddAsync(boardModel);
-        await _context.SaveChangesAsync();
+        await _context.Board.AddAsync(boardModel, token);
+        await _context.SaveChangesAsync(token);
         return boardModel;
     }
 
-    public async Task<Board?> UpdateAsync(Guid id, Board boardModel)
+    public async Task<Board?> UpdateAsync(Guid id, Board boardModel, CancellationToken token)
     {
-        var board = await GetByIdAsync(id);
+        var board = await GetByIdAsync(id, token);
         
         if (board is null)
             return null;
@@ -55,20 +58,20 @@ public class BoardRepository : IBoardRepository
         return board;
     }
 
-    public async Task<Board?> DeleteAsync(Guid id)
+    public async Task<Board?> DeleteAsync(Guid id, CancellationToken token)
     {
-        var board = await GetByIdAsync(id);
+        var board = await GetByIdAsync(id, token);
         
         if (board is null)
             return null;
         
         _context.Board.Remove(board);
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(token);
         return board;
     }
 
-    public Task<bool> ExistAsync(Guid id)
+    public Task<bool> ExistAsync(Guid id, CancellationToken token)
     {
-        return _context.Board.AnyAsync(x => x.id == id);
+        return _context.Board.AnyAsync(x => x.id == id, token);
     }
 }

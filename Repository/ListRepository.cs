@@ -5,35 +5,30 @@ using Interface;
 using Microsoft.EntityFrameworkCore;
 using Models;
 
-public class ListRepository : IListRepository
+public class ListRepository(AppDbContext context) : IListRepository
 {
-    private readonly AppDbContext _context;
-
-    public ListRepository(AppDbContext context)
+    public async Task<List<List>> GetAllAsync(CancellationToken token)
     {
-        _context = context;
-    }
-    
-    public async Task<List<List>> GetAllAsync()
-    {
-        return await _context.List.ToListAsync();
+        return await context.List.Include(p => p.cards).ToListAsync(token);
     }
 
-    public async Task<List?> GetByIdAsync(Guid id)
+    public async Task<List?> GetByIdAsync(Guid id, CancellationToken token)
     {
-        return await _context.List.SingleOrDefaultAsync(x => x.id == id);
+        return await context.List
+            .Include(x => x.cards)
+            .FirstOrDefaultAsync(x => x.id == id, token);
     }
 
-    public async Task<List?> CreateAsync(List listModel)
+    public async Task<List?> CreateAsync(List listModel, CancellationToken token)
     {
-        await _context.List.AddAsync(listModel);
-        await _context.SaveChangesAsync();
+        await context.List.AddAsync(listModel, token);
+        await context.SaveChangesAsync(token);
         return listModel;
     }
 
-    public async Task<List?> UpdateAsync(Guid id, List listModel)
+    public async Task<List?> UpdateAsync(Guid id, List listModel, CancellationToken token)
     {
-        var list = await GetByIdAsync(id);
+        var list = await GetByIdAsync(id, token);
         
         if (list is null) 
             return null;
@@ -42,24 +37,24 @@ public class ListRepository : IListRepository
         list.order = listModel.order;
         list.updatedAt = listModel.updatedAt;
         
-        await _context.SaveChangesAsync();
+        await context.SaveChangesAsync(token);
         
         return list;
     }
 
-    public async Task<List?> DeleteAsync(Guid id)
+    public async Task<List?> DeleteAsync(Guid id, CancellationToken token)
     {
-        var list = await GetByIdAsync(id);
+        var list = await GetByIdAsync(id, token);
         if (list is null)
             return null;
         
-        _context.List.Remove(list);
-        await _context.SaveChangesAsync();
+        context.List.Remove(list);
+        await context.SaveChangesAsync(token);
         return list;
     }
 
-    public async Task<bool> ExistAsync(Guid id)
+    public async Task<bool> ExistAsync(Guid id, CancellationToken token)
     {
-        return await _context.List.AnyAsync(x => x.id == id);
+        return await context.List.AnyAsync(x => x.id == id, token);
     }
 }

@@ -12,6 +12,7 @@ public static class BoardMappers
             Id = boardModel.id,
             OrgId = boardModel.orgId,
             Title = boardModel.title,
+            Lists = boardModel.Lists.Select(list => list?.ToBoardWithListDto()).ToList(),
             ImageId = boardModel.imageId,
             ImageFullUrl = boardModel.imageFullUrl,
             ImageUserName = boardModel.imageUserName,

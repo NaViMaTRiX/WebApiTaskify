@@ -7,35 +7,27 @@ using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("api/v{version:apiVersion}/card")]
-public class CardController : ControllerBase
+public class CardController(ICardRepository cardRepository, IListRepository listRepository)
+    : ControllerBase
 {
-    private readonly ICardRepository _cardRepository;
-    private readonly IListRepository _listRepository;
-
-    public CardController(ICardRepository cardRepository, IListRepository listRepository)
-    {
-        _cardRepository = cardRepository;
-        _listRepository = listRepository;
-    }
-
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll(CancellationToken token)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         
-        var cards = await _cardRepository.GetAllAsync();
+        var cards = await cardRepository.GetAllAsync(token);
         var result = cards.Select(x => x.ToCardDto());
         return Ok(result);
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(Guid id)
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> GetById(Guid id, CancellationToken token)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         
-        var card = await _cardRepository.GetByIdAsync(id);
+        var card = await cardRepository.GetByIdAsync(id, token);
         if (card is null)
             return NotFound("Card not found");
         
@@ -43,16 +35,16 @@ public class CardController : ControllerBase
     }
 
     [HttpPost("{listId:guid}")]
-    public async Task<IActionResult> Create([FromBody] CreateCardDto createCardDto, Guid listId)
+    public async Task<IActionResult> Create([FromBody] CreateCardDto createCardDto, Guid listId, CancellationToken token)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         
-        if(!await _listRepository.ExistAsync(listId))
+        if(!await listRepository.ExistAsync(listId, token))
             return BadRequest("List not found");
         
         var cardModel = createCardDto.ToCardFromCreate(listId);
-        var card = await _cardRepository.CreateAsync(cardModel);
+        var card = await cardRepository.CreateAsync(cardModel, token);
         
         if (card is null)
             return BadRequest("Failed to create card");
@@ -61,12 +53,12 @@ public class CardController : ControllerBase
     }
 
     [HttpPut("{id:guid}")]
-    public async Task<IActionResult> Update([FromBody] UpdateCardDto updateCardDto, Guid id)
+    public async Task<IActionResult> Update([FromBody] UpdateCardDto updateCardDto, Guid id, CancellationToken token)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         
-        var cardModel = await _cardRepository.UpdateAsync(id, updateCardDto.ToCardFromUpdate());
+        var cardModel = await cardRepository.UpdateAsync(id, updateCardDto.ToCardFromUpdate(), token);
         
         if (cardModel is null)
             return NotFound("Card not found");
@@ -75,12 +67,12 @@ public class CardController : ControllerBase
     }
 
     [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> Delete(Guid id)
+    public async Task<IActionResult> Delete(Guid id, CancellationToken token)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         
-        var card = await _cardRepository.DeleteAsync(id);
+        var card = await cardRepository.DeleteAsync(id, token);
         
         if (card is null)
             return NotFound("Card not found");
