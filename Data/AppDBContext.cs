@@ -9,12 +9,17 @@ public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {}
-    
-    public DbSet<Board> Board { get; init; }
-    public DbSet<List> List { get; init; }
-    public DbSet<Card> Card { get; init; }
-    public DbSet<Organization> Organization { get; init; }
-    public DbSet<AuditLog> AuditLog { get; init; }
-    public DbSet<OrgLimit> OrgLimit { get; init; }
-    public DbSet<OrgSubscription> OrgSubscription { get; init; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+    }
+
+    public DbSet<Boards> Board { get; init; }
+    public DbSet<Lists> List { get; init; }
+    public DbSet<Cards> Card { get; init; }
+    public DbSet<Organizations> Organization { get; init; }
+    public DbSet<AuditLogs> AuditLog { get; init; }
+    public DbSet<OrgLimits> OrgLimit { get; init; }
+    public DbSet<OrgSubscriptions> OrgSubscription { get; init; }
 }

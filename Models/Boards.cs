@@ -2,7 +2,7 @@
 
 namespace WebApiTaskify.Models;
 
-public class Board : BaseModel
+public class Boards : BaseModel
 {
     public Guid id { get; set; }
     public string orgId { get; set; }
@@ -13,5 +13,5 @@ public class Board : BaseModel
     public string imageUserName { get; set; } 
     public string imageLinkHTML { get; set; }
     
-    public ICollection<List?> Lists { get; set; }
+    public List<Lists>? lists { get; set; }
 }

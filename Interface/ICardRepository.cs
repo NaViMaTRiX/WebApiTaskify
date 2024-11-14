@@ -4,10 +4,10 @@ using Models;
 
 public interface ICardRepository
 {
-    Task<List<Card>> GetAllAsync(CancellationToken token);
-    Task<Card?> GetByIdAsync(Guid id, CancellationToken token);
-    Task<Card?> CreateAsync(Card cardModel, CancellationToken token);
-    Task<Card?> UpdateAsync(Guid id, Card cardModel, CancellationToken token);
-    Task<Card?> DeleteAsync(Guid id, CancellationToken token);
+    Task<List<Cards>> GetAllAsync(CancellationToken token);
+    Task<Cards?> GetByIdAsync(Guid id, CancellationToken token);
+    Task<Cards?> CreateAsync(Cards cardModel, CancellationToken token);
+    Task<Cards?> UpdateAsync(Guid id, Cards cardModel, CancellationToken token);
+    Task<Cards?> DeleteAsync(Guid id, CancellationToken token);
     Task<bool> ExistAsync(Guid id, CancellationToken token);
 }

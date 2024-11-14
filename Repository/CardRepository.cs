@@ -13,24 +13,24 @@ public class CardRepository : ICardRepository
     {
         _context = context;
     }
-    public async Task<List<Card>> GetAllAsync(CancellationToken token)
+    public async Task<List<Cards>> GetAllAsync(CancellationToken token)
     {
         return await _context.Card.ToListAsync(token);
     }
 
-    public async Task<Card?> GetByIdAsync(Guid id, CancellationToken token)
+    public async Task<Cards?> GetByIdAsync(Guid id, CancellationToken token)
     {
         return await _context.Card.SingleOrDefaultAsync(x => x.id == id, token);
     }
 
-    public async Task<Card?> CreateAsync(Card cardModel, CancellationToken token)
+    public async Task<Cards?> CreateAsync(Cards cardModel, CancellationToken token)
     {
         await _context.Card.AddAsync(cardModel, token);
         await _context.SaveChangesAsync(token);
         return cardModel;
     }
 
-    public async Task<Card?> UpdateAsync(Guid id, Card cardModel, CancellationToken token)
+    public async Task<Cards?> UpdateAsync(Guid id, Cards cardModel, CancellationToken token)
     {
         var checkCard = await GetByIdAsync(id, token);
         if(checkCard is null)
@@ -43,12 +43,12 @@ public class CardRepository : ICardRepository
         checkCard.timeStart = cardModel.timeStart;
         checkCard.timeEnd = cardModel.timeEnd;
         checkCard.ready = cardModel.ready;
-        checkCard.updatedAt = cardModel.updatedAt;
+        checkCard.lastModifyTime = cardModel.lastModifyTime;
         await _context.SaveChangesAsync(token);
         return checkCard;
     }
 
-    public async Task<Card?> DeleteAsync(Guid id, CancellationToken token)
+    public async Task<Cards?> DeleteAsync(Guid id, CancellationToken token)
     {
         var checkCard = await GetByIdAsync(id, token);
         if(checkCard is null)

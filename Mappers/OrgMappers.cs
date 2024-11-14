@@ -5,23 +5,23 @@ using Models;
 
 public static class OrgMappers
 {
-    public static OrgLimitDto ToOrgLimitDto(this OrgLimit orgLimit)
+    public static OrgLimitDto ToOrgLimitDto(this OrgLimits orgLimit)
     {
         return new OrgLimitDto
         {
             Id = orgLimit.id,
             OrgId = orgLimit.orgId,
             Limit = orgLimit.count,
-            updatedAt = orgLimit.updatedAt,
-            createdAt = orgLimit.createdAt,
-            updatedBy = orgLimit.updatedBy,
-            createdBy = orgLimit.createdBy,
+            lastModifyTime = orgLimit.lastModifyTime,
+            createdTime = orgLimit.createdTime,
+            lastModifyUser = orgLimit.lastModifyUser,
+            createdUser = orgLimit.createdUser,
         };
     }
 
-    public static OrgLimit ToCreateFromOrgLimitDto(this CreateOrgLimitDto createOrgLimitDto, string orgId)
+    public static OrgLimits ToCreateFromOrgLimitDto(this CreateOrgLimitDto createOrgLimitDto, string orgId)
     {
-        return new OrgLimit
+        return new OrgLimits
         {
             id = Guid.NewGuid(),
             orgId = orgId,
@@ -29,9 +29,9 @@ public static class OrgMappers
         };
     }
 
-    public static OrgLimit ToUpdateFromOrgLimitDto(this UpdateOrgLimitDto updateOrgLimitDto)
+    public static OrgLimits ToUpdateFromOrgLimitDto(this UpdateOrgLimitDto updateOrgLimitDto)
     {
-        return new OrgLimit
+        return new OrgLimits
         {
             count = updateOrgLimitDto.Limit,
         };

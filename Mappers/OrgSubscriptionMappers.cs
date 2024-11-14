@@ -5,7 +5,7 @@ using Models;
 
 public static class OrgSubscriptionMappers
 {
-    public static OrgSubscriptionDto ToOrgSubscriptionDto(this OrgSubscription orgSubscription)
+    public static OrgSubscriptionDto ToOrgSubscriptionDto(this OrgSubscriptions orgSubscription)
     {
         return new OrgSubscriptionDto
         {
@@ -15,16 +15,16 @@ public static class OrgSubscriptionMappers
             StripeCustomerId = orgSubscription.stripe_customer_id,
             StripeSubscriptionId = orgSubscription.stripe_subscription_id,
             StripeCurrentPeriodEnd = orgSubscription.stripe_current_period_end,
-            createdBy = orgSubscription.createdBy,
-            updatedBy = orgSubscription.updatedBy,
-            createdAt = orgSubscription.createdAt,
-            updatedAt = orgSubscription.updatedAt,
+            createdUser = orgSubscription.createdUser,
+            lastModifyUser = orgSubscription.lastModifyUser,
+            createdTime = orgSubscription.createdTime,
+            lastModifyTime = orgSubscription.lastModifyTime,
         };
     }
 
-    public static OrgSubscription ToOrgSubscriptionDtoFromCreate(this CreateOrgSubscriptionDto createOrgSubscription, string orgId)
+    public static OrgSubscriptions ToOrgSubscriptionDtoFromCreate(this CreateOrgSubscriptionDto createOrgSubscription, string orgId)
     {
-        return new OrgSubscription
+        return new OrgSubscriptions
         {
             id = Guid.NewGuid(),
             orgId = orgId,

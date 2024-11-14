@@ -5,7 +5,7 @@ using Models;
 
 public static class ListMappers
 {
-    public static ListDto ToListDto(this List listModel) // изпользуется длЯ вывода данных на страницу
+    public static ListDto ToListDto(this Lists listModel) // изпользуется длЯ вывода данных на страницу
     {
         return new ListDto
         {
@@ -14,14 +14,14 @@ public static class ListMappers
             Title = listModel.title,
             Order = listModel.order,
             Cards = listModel.cards.Select(x => x?.ToCardDto()).ToList(),
-            createdAt = listModel.createdAt,
-            updatedAt = listModel.updatedAt,
-            createdBy = listModel.createdBy,
-            updatedBy = listModel.updatedBy, // TODO: сделать вот это везде
+            createdTime = listModel.createdTime,
+            lastModifyTime = listModel.lastModifyTime,
+            createdUser = listModel.createdUser,
+            lastModifyUser = listModel.lastModifyUser, // TODO: сделать вот это везде
         };
     }
     
-    public static ListDto ToBoardWithListDto(this List listModel) // изпользуется длЯ вывода данных на страницу
+    public static ListDto ToBoardWithListDto(this Lists listModel) // изпользуется длЯ вывода данных на страницу
     {
         return new ListDto
         {
@@ -29,17 +29,17 @@ public static class ListMappers
             BoardId = listModel.boardId,
             Title = listModel.title,
             Order = listModel.order,
-            createdAt = listModel.createdAt,
-            updatedAt = listModel.updatedAt,
-            createdBy = listModel.createdBy,
-            updatedBy = listModel.updatedBy, // TODO: сделать вот это везде
+            createdTime = listModel.createdTime,
+            lastModifyTime = listModel.lastModifyTime,
+            createdUser = listModel.createdUser,
+            lastModifyUser = listModel.lastModifyUser, // TODO: сделать вот это везде
         };
     }
 
     // изпользуется для ввода данных на форму
-    public static List ToListFromCreate(this CreateListDto createListModel, Guid boardId)
+    public static Lists ToListFromCreate(this CreateListDto createListModel, Guid boardId)
     {
-        return new List
+        return new Lists
         {
             id = Guid.NewGuid(),
             boardId = boardId,
@@ -48,9 +48,9 @@ public static class ListMappers
         };
     }
 
-    public static List ToListFromUpdate(this UpdateListDto updateListModel)
+    public static Lists ToListFromUpdate(this UpdateListDto updateListModel)
     {
-        return new List
+        return new Lists
         {
             title = updateListModel.Title,
             order = updateListModel.Order,

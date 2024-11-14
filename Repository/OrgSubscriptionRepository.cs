@@ -15,24 +15,24 @@ public class OrgSubscriptionRepository : IOrgSubscriptionRepository
     }
 
 
-    public async Task<List<OrgSubscription>> GetAllAsync(CancellationToken token)
+    public async Task<List<OrgSubscriptions>> GetAllAsync(CancellationToken token)
     {
         return await _context.OrgSubscription.ToListAsync(token);
     }
 
-    public async Task<OrgSubscription?> GetByIdAsync(Guid id, CancellationToken token)
+    public async Task<OrgSubscriptions?> GetByIdAsync(Guid id, CancellationToken token)
     {
         return await _context.OrgSubscription.SingleOrDefaultAsync(x => x.id == id, token);
     }
 
-    public async Task<OrgSubscription?> CreateAsync(OrgSubscription listModel, CancellationToken token)
+    public async Task<OrgSubscriptions?> CreateAsync(OrgSubscriptions listModel, CancellationToken token)
     {
         await _context.OrgSubscription.AddAsync(listModel, token);
         await _context.SaveChangesAsync(token);
         return listModel;
     }
 
-    public async Task<OrgSubscription?> DeleteAsync(Guid id, CancellationToken token)
+    public async Task<OrgSubscriptions?> DeleteAsync(Guid id, CancellationToken token)
     {
         var listModel = await GetByIdAsync(id, token);
 

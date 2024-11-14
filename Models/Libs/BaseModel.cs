@@ -1,9 +1,12 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace WebApiTaskify.Models.Libs;
 
 public abstract class BaseModel
 {
-    public DateTime createdAt { get; set; } = DateTime.UtcNow;
-    public DateTime? updatedAt { get; set; } = DateTime.UtcNow;
-    public string createdBy { get; set; } = string.Empty;
-    public string? updatedBy { get; set; } = string.Empty;
+    [Required]
+    public DateTime createdTime { get; set; } = DateTime.UtcNow;
+    public DateTime? lastModifyTime { get; set; } = DateTime.UtcNow;
+    public string createdUser { get; set; } = string.Empty;
+    public string? lastModifyUser { get; set; } = string.Empty;
 }

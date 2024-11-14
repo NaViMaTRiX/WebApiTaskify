@@ -7,7 +7,7 @@ using Models;
 
 public static class AuditLogMappers
 {
-    public static AuditLogDto ToAuditLogDto(this AuditLog auditLog)
+    public static AuditLogDto ToAuditLogDto(this AuditLogs auditLog)
     {
         return new AuditLogDto
         {
@@ -20,16 +20,16 @@ public static class AuditLogMappers
             EntityId = auditLog.entityId,
             EntityTitle = auditLog.entityTitle,
             EntityType = auditLog.entityType,
-            createdAt = auditLog.createdAt,
-            updatedAt = auditLog.updatedAt,
-            createdBy = auditLog.createdBy,
-            updatedBy = auditLog.updatedBy,
+            createdTime = auditLog.createdTime,
+            lastModifyTime = auditLog.lastModifyTime,
+            createdUser = auditLog.createdUser,
+            lastModifyUser = auditLog.lastModifyUser,
         };
     }
 
-    public static AuditLog ToAuditLogsFromCreate(this CreateAuditLogDto createAuditLog)
+    public static AuditLogs ToAuditLogsFromCreate(this CreateAuditLogDto createAuditLog)
     {
-        return new AuditLog
+        return new AuditLogs
         {
             id = Guid.NewGuid(),
             orgId = createAuditLog.OrgId,

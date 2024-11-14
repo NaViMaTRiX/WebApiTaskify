@@ -14,24 +14,24 @@ public class OrgLimitRepository : IOrgLimitRepository
         _context = context;
     }
 
-    public async Task<List<OrgLimit>> GetAllAsync(CancellationToken token)
+    public async Task<List<OrgLimits>> GetAllAsync(CancellationToken token)
     {
         return await _context.OrgLimit.ToListAsync(token);
     }
 
-    public async Task<OrgLimit?> GetByIdAsync(Guid id, CancellationToken token)
+    public async Task<OrgLimits?> GetByIdAsync(Guid id, CancellationToken token)
     {
         return await _context.OrgLimit.SingleOrDefaultAsync(x =>x.id == id, token);
     }
 
-    public async Task<OrgLimit?> CreateAsync(OrgLimit listModel, CancellationToken token)
+    public async Task<OrgLimits?> CreateAsync(OrgLimits listModel, CancellationToken token)
     {
         await _context.OrgLimit.AddAsync(listModel, token);
         await _context.SaveChangesAsync(token);
         return listModel;
     }
 
-    public async Task<OrgLimit?> UpdateAsync(Guid id, OrgLimit listModel, CancellationToken token)
+    public async Task<OrgLimits?> UpdateAsync(Guid id, OrgLimits listModel, CancellationToken token)
     {
         var orgLimit = await GetByIdAsync(id, token);
         
@@ -39,12 +39,12 @@ public class OrgLimitRepository : IOrgLimitRepository
             return null;
         
         orgLimit.count = listModel.count;
-        orgLimit.updatedAt = listModel.updatedAt;
+        orgLimit.lastModifyTime = listModel.lastModifyTime;
         await _context.SaveChangesAsync(token);
         return orgLimit;
     }
 
-    public async Task<OrgLimit?> DeleteAsync(Guid id, CancellationToken token)
+    public async Task<OrgLimits?> DeleteAsync(Guid id, CancellationToken token)
     {
         var orgLimit = await GetByIdAsync(id, token);
         if (orgLimit is null)

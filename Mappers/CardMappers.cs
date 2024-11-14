@@ -5,7 +5,7 @@ using Models;
 
 public static class CardMappers
 {
-    public static CardDto ToCardDto(this Card cardDto)
+    public static CardDto ToCardDto(this Cards cardDto)
     {
         return new CardDto
         {
@@ -18,16 +18,16 @@ public static class CardMappers
             timeStart = cardDto.timeStart,
             timeEnd = cardDto.timeEnd,
             timeChecked = cardDto.timer,
-            createdAt = cardDto.createdAt,
-            updatedAt = cardDto.updatedAt,
-            updatedBy = cardDto.updatedBy,
-            createdBy = cardDto.createdBy,
+            createdTime = cardDto.createdTime,
+            lastModifyTime = cardDto.lastModifyTime,
+            lastModifyUser = cardDto.lastModifyUser,
+            createdUser = cardDto.createdUser,
         };
     }
 
-    public static Card ToCardFromCreate(this CreateCardDto createCardDto, Guid listId)
+    public static Cards ToCardFromCreate(this CreateCardDto createCardDto, Guid listId)
     {
-        return new Card
+        return new Cards
         {
             id = Guid.NewGuid(),
             listId = listId,
@@ -41,9 +41,9 @@ public static class CardMappers
         };
     }
 
-    public static Card ToCardFromUpdate(this UpdateCardDto updateCardDto)
+    public static Cards ToCardFromUpdate(this UpdateCardDto updateCardDto)
     {
-        return new Card
+        return new Cards
         {
             title = updateCardDto.Title,
             description = updateCardDto.Description,

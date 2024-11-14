@@ -7,25 +7,25 @@ using Models;
 
 public class BoardRepository(AppDbContext context) : IBoardRepository
 {
-    public async Task<List<Board>> GetAllAsync(CancellationToken token)
+    public async Task<List<Boards>> GetAllAsync(CancellationToken token)
     {
-        return await context.Board.Include(x => x.Lists).ToListAsync(token);;
+        return await context.Board.Include(x => x.lists).ToListAsync(token);;
     }
 
-    public async Task<Board?> GetByIdAsync(Guid id, CancellationToken token)
+    public async Task<Boards?> GetByIdAsync(Guid id, CancellationToken token)
     {
          var board =  await context.Board
-            .Include(x => x.Lists)
+            .Include(x => x.lists)
             .FirstOrDefaultAsync(x => x.id == id, token);
          return board;
     }
 
-    public Task<Board?> GetAllByOrgIdAsync(string orgId, CancellationToken token)
+    public Task<Boards?> GetAllByOrgIdAsync(string orgId, CancellationToken token)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Board?> CreateAsync(string orgId, Board boardModel, CancellationToken token)
+    public async Task<Boards?> CreateAsync(string orgId, Boards boardModel, CancellationToken token)
     {
         var objOrgId = await context.Board.SingleOrDefaultAsync(x => x.orgId == orgId, token);
         if (objOrgId is null)
@@ -36,7 +36,7 @@ public class BoardRepository(AppDbContext context) : IBoardRepository
         return boardModel;
     }
 
-    public async Task<Board?> UpdateAsync(Guid id, Board boardModel, CancellationToken token)
+    public async Task<Boards?> UpdateAsync(Guid id, Boards boardModel, CancellationToken token)
     {
         var board = await GetByIdAsync(id, token);
         
@@ -50,13 +50,13 @@ public class BoardRepository(AppDbContext context) : IBoardRepository
         board.imageFullUrl = boardModel.imageFullUrl;
         board.imageUserName = boardModel.imageUserName;
         board.imageLinkHTML = boardModel.imageLinkHTML;
-        board.updatedAt = boardModel.updatedAt;
+        board.lastModifyTime = boardModel.lastModifyTime;
         
         await context.SaveChangesAsync();
         return board;
     }
 
-    public async Task<Board?> DeleteAsync(Guid id, CancellationToken token)
+    public async Task<Boards?> DeleteAsync(Guid id, CancellationToken token)
     {
         var board = await GetByIdAsync(id, token);
         
