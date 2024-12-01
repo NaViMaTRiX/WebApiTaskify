@@ -9,5 +9,5 @@ public class OrgSubscriptionDto : BaseModel
     public string StripeCustomerId { get; set; }
     public string StripeSubscriptionId { get; set; }
     public string StripePriseId { get; set; } // это пока не подключил Юкассу
-    public DateTime StripeCurrentPeriodEnd { get; set; } = DateTime.UtcNow;
+    public DateTime? StripeCurrentPeriodEnd { get; set; } = DateTime.UtcNow;
 }

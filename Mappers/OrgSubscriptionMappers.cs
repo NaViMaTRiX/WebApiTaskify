@@ -11,10 +11,10 @@ public static class OrgSubscriptionMappers
         {
             Id = orgSubscription.id,
             OrgId = orgSubscription.orgId,
-            StripePriseId = orgSubscription.stripe_price_id,
-            StripeCustomerId = orgSubscription.stripe_customer_id,
-            StripeSubscriptionId = orgSubscription.stripe_subscription_id,
-            StripeCurrentPeriodEnd = orgSubscription.stripe_current_period_end,
+            StripePriseId = orgSubscription.StripePriceId,
+            StripeCustomerId = orgSubscription.StripeCustomerId,
+            StripeSubscriptionId = orgSubscription.StripeSubscriptionId,
+            StripeCurrentPeriodEnd = orgSubscription.StripeCurrentPeriodEnd,
             createdUser = orgSubscription.createdUser,
             lastModifyUser = orgSubscription.lastModifyUser,
             createdTime = orgSubscription.createdTime,
@@ -28,9 +28,9 @@ public static class OrgSubscriptionMappers
         {
             id = Guid.NewGuid(),
             orgId = orgId,
-            stripe_price_id = createOrgSubscription.StripePriseId,
-            stripe_customer_id = createOrgSubscription.StripeCustomerId,
-            stripe_subscription_id = createOrgSubscription.StripeSubscriptionId,
+            StripePriceId = createOrgSubscription.StripePriseId,
+            StripeCustomerId = createOrgSubscription.StripeCustomerId,
+            StripeSubscriptionId = createOrgSubscription.StripeSubscriptionId,
         };
     }
 }

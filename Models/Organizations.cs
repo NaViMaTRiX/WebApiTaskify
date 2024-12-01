@@ -4,13 +4,13 @@ namespace WebApiTaskify.Models;
 
 public class Organizations : BaseModel
 {
-    public Guid id { get; set; }
-    public string name { get; set; }
-    public string? description { get; set; }
-    public string logo { get; set; }
-    public string? website { get; set; }
-    public string? email { get; set; }
-    public string? phone { get; set; }
-    public string? address { get; set; }
-    public string? state { get; set; }
+    public Guid Id { get; set; }
+    public string Name { get; set; }
+    public string? Description{ get; set; }
+    public string Logo{ get; set; }
+    public string? Website{ get; set; }
+    public string? Email{ get; set; }
+    public string? Phone{ get; set; }
+    public string? Address { get; set; }
+    public string? State { get; set; }
 }

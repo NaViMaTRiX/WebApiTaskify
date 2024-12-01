@@ -10,9 +10,10 @@ public class OrgSubscriptionConfiguration : IEntityTypeConfiguration<OrgSubscrip
     {
         builder.ToTable("org_subscriptions").HasKey(c => c.id);
         builder.Property(c => c.id).IsRequired();
-        builder.Property(c => c.stripe_customer_id).HasMaxLength(300).IsRequired(false).HasColumnName("stripe_customer_id");
-        builder.Property(c => c.stripe_price_id).IsRequired(false).HasColumnName("stripe_price_id").HasMaxLength(300);
-        builder.Property(c => c.stripe_subscription_id).IsRequired(false).HasColumnName("stripe_subscription_id").HasMaxLength(300);
+        builder.Property(c => c.StripeCustomerId).HasMaxLength(300).IsRequired(false).HasColumnName("stripe_customer_id");
+        builder.Property(c => c.StripePriceId).IsRequired(false).HasColumnName("stripe_price_id").HasMaxLength(300);
+        builder.Property(c => c.StripeSubscriptionId).IsRequired(false).HasColumnName("stripe_subscription_id").HasMaxLength(300);
+        builder.Property(c => c.StripeCurrentPeriodEnd).IsRequired(false).HasColumnName("stripe_current_period_end");
         builder.Property(c => c.orgId).IsRequired(false).HasColumnName("org_id").HasMaxLength(100);
         builder.Property(c => c.createdTime).IsRequired().HasColumnName("created_time");
         builder.Property(c => c.lastModifyTime).IsRequired().HasColumnName("last_modify_time");

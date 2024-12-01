@@ -21,6 +21,10 @@ public class CardConfiguration : IEntityTypeConfiguration<Cards>
         builder.Property(c => c.lastModifyTime).IsRequired().HasColumnName("last_modify_time");
         builder.Property(c => c.createdUser).IsRequired(false).HasColumnName("created_user");
         builder.Property(c => c.lastModifyUser).IsRequired(false).HasColumnName("last_modify_user");
-        //builder.HasOne(x => x.list).WithMany(x => x.cards).HasForeignKey(x => x.listId).OnDelete(DeleteBehavior.Cascade);
+        
+        builder.HasOne(c => c.List)
+            .WithMany(l => l.Cards)
+            .HasForeignKey("listId") // Теневое свойство (не существует в модели)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

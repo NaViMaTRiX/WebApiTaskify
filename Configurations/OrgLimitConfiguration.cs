@@ -10,7 +10,7 @@ public class OrgLimitConfiguration : IEntityTypeConfiguration<OrgLimits>
     {
         builder.ToTable("org_limits").HasKey(c => c.id);
         builder.Property(c => c.id).IsRequired();
-        builder.Property(c => c.count).IsRequired(false);
+        builder.Property(c => c.count).IsRequired(false).HasColumnName("count");
         builder.Property(c => c.orgId).IsRequired(false).HasColumnName("org_id").HasMaxLength(100);
         builder.Property(c => c.createdTime).IsRequired().HasColumnName("created_time");
         builder.Property(c => c.lastModifyTime).IsRequired().HasColumnName("last_modify_time");

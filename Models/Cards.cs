@@ -6,14 +6,15 @@ namespace WebApiTaskify.Models;
 public class Cards : BaseModel
 {
     public Guid id { get; set; }
-    public string title { get; set; } = string.Empty;
+    public string? title { get; set; }
     public int? order { get; set; }
-    public Guid? listId { get; set; }
-    public string? description { get; set; } = string.Empty;
-    public bool? timer { get; set; } //хз
-    public bool? ready { get; set; } //хз
+    public Guid? listId { get; init; }
+    public string? description { get; set; }
+    public bool? timer { get; set; } // таймер есть или нету
+    public bool? ready { get; set; } // непомню
     public DateTime? timeStart { get; set; } 
     public DateTime? timeEnd { get; set; }
 
-    //public Lists? list { get; set; }
+    [JsonIgnore]
+    public Lists? List { get; init; }
 }

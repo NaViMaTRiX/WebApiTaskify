@@ -13,7 +13,7 @@ public static class ListMappers
             BoardId = listModel.boardId,
             Title = listModel.title,
             Order = listModel.order,
-            Cards = listModel.cards.Select(x => x?.ToCardDto()).ToList(),
+            Cards = listModel.Cards.Select(x => x?.ToCardDto()).ToList(),
             createdTime = listModel.createdTime,
             lastModifyTime = listModel.lastModifyTime,
             createdUser = listModel.createdUser,

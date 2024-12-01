@@ -9,13 +9,13 @@ public class BoardRepository(AppDbContext context) : IBoardRepository
 {
     public async Task<List<Boards>> GetAllAsync(CancellationToken token)
     {
-        return await context.Board.Include(x => x.lists).ToListAsync(token);;
+        return await context.Board.Include(x => x.Lists).ToListAsync(token);;
     }
 
     public async Task<Boards?> GetByIdAsync(Guid id, CancellationToken token)
     {
          var board =  await context.Board
-            .Include(x => x.lists)
+            .Include(x => x.Lists)
             .FirstOrDefaultAsync(x => x.id == id, token);
          return board;
     }

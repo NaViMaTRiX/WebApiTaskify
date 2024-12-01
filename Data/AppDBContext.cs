@@ -1,17 +1,35 @@
-﻿using WebApiTaskify.Models.Enum;
+﻿using Npgsql;
+using WebApiTaskify.Models.Enum;
 
 namespace WebApiTaskify.Data;
 
 using Microsoft.EntityFrameworkCore;
 using Models;
 
-public class AppDbContext : DbContext
+public class AppDbContext(DbContextOptions<AppDbContext> options, IConfiguration configuration)
+    : DbContext(options)
 {
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-    {}
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        NpgsqlConnection.GlobalTypeMapper.EnableUnmappedTypes();
+
+        // Получаем строку подключения из конфигурации
+        var connectionString = configuration.GetConnectionString("TestCopy");
+
+        // Настраиваем DataSource с EnableUnmappedTypes
+        var dataSourceBuilder = new NpgsqlDataSourceBuilder(connectionString);
+        dataSourceBuilder.EnableUnmappedTypes();
+        var dataSource = dataSourceBuilder.Build();
+
+        // Используем DataSource для подключения
+        optionsBuilder.UseNpgsql(dataSource);
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.HasPostgresEnum<ACTION>("public", "action");
+        modelBuilder.HasPostgresEnum<ENTITY_TYPE>("public","entity_type");
+        
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
     }
 

@@ -2,8 +2,10 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Asp.Versioning;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 using WebApiTaskify.Data;
 using WebApiTaskify.Interface;
+using WebApiTaskify.Models.Enum;
 using WebApiTaskify.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +13,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddMemoryCache();
 builder.Configuration.AddUserSecrets<Program>();
 
 builder.Services.AddApiVersioning(options =>
@@ -26,10 +27,10 @@ builder.Services.AddApiVersioning(options =>
         options.SubstituteApiVersionInUrl = true;
     });
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-{
-    options.UseNpgsql(builder.Configuration.GetConnectionString("TestCopy"));
-});
+NpgsqlConnection.GlobalTypeMapper.MapEnum<ACTION>("action");
+NpgsqlConnection.GlobalTypeMapper.MapEnum<ENTITY_TYPE>("entity_type");
+
+builder.Services.AddDbContext<AppDbContext>();
 
 builder.Services.AddScoped<IBoardRepository, BoardRepository>();
 builder.Services.AddScoped<IListRepository, ListRepository>();

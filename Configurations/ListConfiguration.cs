@@ -17,6 +17,10 @@ public class ListConfiguration : IEntityTypeConfiguration<Lists>
         builder.Property(c => c.lastModifyTime).IsRequired().HasColumnName("last_modify_time");
         builder.Property(c => c.createdUser).IsRequired(false).HasColumnName("created_user");
         builder.Property(c => c.lastModifyUser).IsRequired(false).HasColumnName("last_modify_user");
-        //builder.HasOne(x => x.board).WithMany(x => x.lists).HasForeignKey(c => c.boardId).OnDelete(DeleteBehavior.Cascade);
+        
+        builder.HasOne(l => l.Board)
+            .WithMany(l => l.Lists)
+            .HasForeignKey("boardId") // Теневое свойство (не существует в модели)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }
