@@ -38,7 +38,6 @@ public class ListRepository(AppDbContext context) : IListRepository
         list.LastModifyTime = listModel.LastModifyTime;
         
         await context.SaveChangesAsync(token);
-        
         return list;
     }
 

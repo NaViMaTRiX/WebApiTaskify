@@ -5,29 +5,22 @@ using Interface;
 using Microsoft.EntityFrameworkCore;
 using Models;
 
-public class OrgLimitRepository : IOrgLimitRepository
+public class OrgLimitRepository(AppDbContext context) : IOrgLimitRepository
 {
-    private readonly AppDbContext _context;
-
-    public OrgLimitRepository(AppDbContext context)
-    {
-        _context = context;
-    }
-
     public async Task<List<OrgLimits>> GetAllAsync(CancellationToken token)
     {
-        return await _context.OrgLimit.ToListAsync(token);
+        return await context.OrgLimit.ToListAsync(token);
     }
 
     public async Task<OrgLimits?> GetByIdAsync(Guid id, CancellationToken token)
     {
-        return await _context.OrgLimit.SingleOrDefaultAsync(x =>x.Id == id, token);
+        return await context.OrgLimit.SingleOrDefaultAsync(x =>x.Id == id, token);
     }
 
     public async Task<OrgLimits?> CreateAsync(OrgLimits listModel, CancellationToken token)
     {
-        await _context.OrgLimit.AddAsync(listModel, token);
-        await _context.SaveChangesAsync(token);
+        await context.OrgLimit.AddAsync(listModel, token);
+        await context.SaveChangesAsync(token);
         return listModel;
     }
 
@@ -40,7 +33,7 @@ public class OrgLimitRepository : IOrgLimitRepository
         
         orgLimit.Count = listModel.Count;
         orgLimit.LastModifyTime = listModel.LastModifyTime;
-        await _context.SaveChangesAsync(token);
+        await context.SaveChangesAsync(token);
         return orgLimit;
     }
 
@@ -50,13 +43,13 @@ public class OrgLimitRepository : IOrgLimitRepository
         if (orgLimit is null)
             return null;
         
-        _context.OrgLimit.Remove(orgLimit);
-        await _context.SaveChangesAsync(token);
+        context.OrgLimit.Remove(orgLimit);
+        await context.SaveChangesAsync(token);
         return orgLimit;
     }
 
     public Task<bool> ExistAsync(Guid id, CancellationToken token)
     {
-        return _context.OrgLimit.AnyAsync(x => x.Id == id, token);
+        return context.OrgLimit.AnyAsync(x => x.Id == id, token);
     }
 }

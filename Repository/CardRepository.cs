@@ -5,28 +5,22 @@ using Interface;
 using Microsoft.EntityFrameworkCore;
 using Models;
 
-public class CardRepository : ICardRepository
+public class CardRepository(AppDbContext context) : ICardRepository
 {
-    private readonly AppDbContext _context;
-
-    public CardRepository(AppDbContext context)
-    {
-        _context = context;
-    }
     public async Task<List<Cards>> GetAllAsync(CancellationToken token)
     {
-        return await _context.Card.ToListAsync(token);
+        return await context.Card.ToListAsync(token);
     }
 
     public async Task<Cards?> GetByIdAsync(Guid id, CancellationToken token)
     {
-        return await _context.Card.SingleOrDefaultAsync(x => x.Id == id, token);
+        return await context.Card.SingleOrDefaultAsync(x => x.Id == id, token);
     }
 
     public async Task<Cards?> CreateAsync(Cards cardModel, CancellationToken token)
     {
-        await _context.Card.AddAsync(cardModel, token);
-        await _context.SaveChangesAsync(token);
+        await context.Card.AddAsync(cardModel, token);
+        await context.SaveChangesAsync(token);
         return cardModel;
     }
 
@@ -44,7 +38,8 @@ public class CardRepository : ICardRepository
         checkCard.TimeEnd = cardModel.TimeEnd;
         checkCard.Ready = cardModel.Ready;
         checkCard.LastModifyTime = cardModel.LastModifyTime;
-        await _context.SaveChangesAsync(token);
+        
+        await context.SaveChangesAsync(token);
         return checkCard;
     }
 
@@ -53,13 +48,13 @@ public class CardRepository : ICardRepository
         var checkCard = await GetByIdAsync(id, token);
         if(checkCard is null)
             return null;
-        _context.Card.Remove(checkCard);
-        await _context.SaveChangesAsync(token);
+        context.Card.Remove(checkCard);
+        await context.SaveChangesAsync(token);
         return checkCard;
     }
 
     public  Task<bool> ExistAsync(Guid id, CancellationToken token)
     {
-        return _context.Card.AnyAsync(x=>x.Id == id, token);
+        return context.Card.AnyAsync(x=>x.Id == id, token);
     }
 }

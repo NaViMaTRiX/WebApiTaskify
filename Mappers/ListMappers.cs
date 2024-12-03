@@ -5,7 +5,7 @@ using Models;
 
 public static class ListMappers
 {
-    public static ListDto ToListDto(this Lists listModel) // изпользуется длЯ вывода данных на страницу
+    public static ListDto ToListDto(this Lists listModel) // изпользуется для вывода данных на страницу
     {
         return new ListDto
         {
@@ -21,13 +21,13 @@ public static class ListMappers
         };
     }
     
-    public static ListDto ToBoardWithListDto(this Lists listModel) // изпользуется длЯ вывода данных на страницу
+    public static ListDto ToBoardWithListDto(this Lists listModel) // изпользуется для вывода данных на страницу
     {
         return new ListDto
         {
             Id = listModel.Id,
             BoardId = listModel.BoardId,
-            Title = listModel.Title,
+            Title = listModel.Title!,
             Order = listModel.Order,
             CreatedTime = listModel.CreatedTime,
             LastModifyTime = listModel.LastModifyTime,

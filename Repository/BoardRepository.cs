@@ -52,7 +52,7 @@ public class BoardRepository(AppDbContext context) : IBoardRepository
         board.ImageLinkHTML = boardModel.ImageLinkHTML;
         board.LastModifyTime = boardModel.LastModifyTime;
         
-        await context.SaveChangesAsync();
+        await context.SaveChangesAsync(token);
         return board;
     }
 

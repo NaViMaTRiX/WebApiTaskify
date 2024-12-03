@@ -2,19 +2,12 @@
 
 using System.ComponentModel.DataAnnotations;
 
-public class CreateBoardDto
+public record CreateBoardDto
 {
-    [Required]
-    [MinLength(3)]
-    public string Title { get; set; } = string.Empty;
-    [Required]
-    public string ImageId { get; set; } = string.Empty;
-    [Required]
-    public string ImageFullUrl { get; set; } = string.Empty;
-    [Required]
-    public string ImageThumbUrl { get; set; } = string.Empty;
-    [Required]
-    public string ImageUserName { get; set; } =string.Empty;
-    [Required]
-    public string ImageLinkHtml { get; set; } = string.Empty;
+    public string Title { get; set; }
+    public string ImageId { get; set; }
+    public string ImageFullUrl { get; set; }
+    public string ImageThumbUrl { get; set; }
+    public string ImageUserName { get; set; }
+    public string ImageLinkHtml { get; set; }
 }
