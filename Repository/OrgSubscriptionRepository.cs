@@ -22,7 +22,7 @@ public class OrgSubscriptionRepository : IOrgSubscriptionRepository
 
     public async Task<OrgSubscriptions?> GetByIdAsync(Guid id, CancellationToken token)
     {
-        return await _context.OrgSubscription.SingleOrDefaultAsync(x => x.id == id, token);
+        return await _context.OrgSubscription.SingleOrDefaultAsync(x => x.Id == id, token);
     }
 
     public async Task<OrgSubscriptions?> CreateAsync(OrgSubscriptions listModel, CancellationToken token)
@@ -46,6 +46,6 @@ public class OrgSubscriptionRepository : IOrgSubscriptionRepository
 
     public async Task<bool> ExistAsync(Guid id, CancellationToken token)
     {
-        return await _context.OrgSubscription.AnyAsync(x => x.id == id, token);
+        return await _context.OrgSubscription.AnyAsync(x => x.Id == id, token);
     }
 }

@@ -4,13 +4,13 @@ using WebApiTaskify.Models.Libs;
 namespace WebApiTaskify.Models;
 public class AuditLogs : BaseModel
 {
-    public Guid id { get; set; } 
-    public string? orgId { get; set; }
-    public ACTION? action { get; set; }
-    public string? entityId { get; set; } 
-    public string? entityTitle { get; set; }
-    public ENTITY_TYPE? entityType { get; set; }
-    public string? userId { get; set; }
-    public string? userName { get; set; } 
-    public string? userImage { get; set; }
+    public Guid Id { get; init; } 
+    public string? OrgId { get; init; }
+    public ACTION? Action { get; init; }
+    public string? EntityId { get; init; } 
+    public string? EntityTitle { get; init; }
+    public ENTITY_TYPE? EntityType { get; init; }
+    public string? UserId { get; init; }
+    public string? UserName { get; init; } 
+    public string? UserImage { get; init; }
 }

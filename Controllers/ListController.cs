@@ -34,7 +34,7 @@ public class ListController(IListRepository listRepository, IBoardRepository boa
         return Ok(list.ToListDto());
     }
 
-    [HttpPost("{boardId:guid}")]
+    [HttpPost("{BoardId:guid}")]
     public async Task<IActionResult> Create([FromRoute] Guid boardId, [FromBody] CreateListDto createListDto, CancellationToken token)
     {
          if (!ModelState.IsValid)
@@ -50,7 +50,7 @@ public class ListController(IListRepository listRepository, IBoardRepository boa
          
          if (list is null)
              return BadRequest("Failed to create list");
-         return CreatedAtAction(nameof(GetById), new { id = list.id }, list.ToListDto());
+         return CreatedAtAction(nameof(GetById), new { id = list.Id }, list.ToListDto());
     }
 
     [HttpPut("{id}")]

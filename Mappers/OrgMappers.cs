@@ -9,13 +9,13 @@ public static class OrgMappers
     {
         return new OrgLimitDto
         {
-            Id = orgLimit.id,
-            OrgId = orgLimit.orgId,
-            Limit = orgLimit.count,
-            lastModifyTime = orgLimit.lastModifyTime,
-            createdTime = orgLimit.createdTime,
-            lastModifyUser = orgLimit.lastModifyUser,
-            createdUser = orgLimit.createdUser,
+            Id = orgLimit.Id,
+            OrgId = orgLimit.OrgId,
+            Limit = orgLimit.Count,
+            LastModifyTime = orgLimit.LastModifyTime,
+            CreatedTime = orgLimit.CreatedTime,
+            LastModifyUser = orgLimit.LastModifyUser,
+            CreatedUser = orgLimit.CreatedUser,
         };
     }
 
@@ -23,9 +23,9 @@ public static class OrgMappers
     {
         return new OrgLimits
         {
-            id = Guid.NewGuid(),
-            orgId = orgId,
-            count = createOrgLimitDto.Limit,
+            Id = Guid.NewGuid(),
+            OrgId = orgId,
+            Count = createOrgLimitDto.Limit,
         };
     }
 
@@ -33,7 +33,7 @@ public static class OrgMappers
     {
         return new OrgLimits
         {
-            count = updateOrgLimitDto.Limit,
+            Count = updateOrgLimitDto.Limit,
         };
     }
 }

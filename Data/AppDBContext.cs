@@ -11,25 +11,26 @@ public class AppDbContext(DbContextOptions<AppDbContext> options, IConfiguration
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        NpgsqlConnection.GlobalTypeMapper.EnableUnmappedTypes();
-
         // Получаем строку подключения из конфигурации
-        var connectionString = configuration.GetConnectionString("TestCopy");
+        var builder = new NpgsqlDataSourceBuilder(configuration.GetConnectionString("TestCopy"))
+            .EnableDynamicJson();
+        
+        // Настраиваем сопоставление типов Enum
+        builder.MapEnum<ACTION>("action");
+        builder.MapEnum<ENTITY_TYPE>("entity_type");
 
-        // Настраиваем DataSource с EnableUnmappedTypes
-        var dataSourceBuilder = new NpgsqlDataSourceBuilder(connectionString);
-        dataSourceBuilder.EnableUnmappedTypes();
-        var dataSource = dataSourceBuilder.Build();
-
-        // Используем DataSource для подключения
+        // Строим DataSource и передаем его в UseNpgsql
+        var dataSource = builder.Build();
         optionsBuilder.UseNpgsql(dataSource);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.HasPostgresEnum<ACTION>("public", "action");
-        modelBuilder.HasPostgresEnum<ENTITY_TYPE>("public","entity_type");
+        // Регистрируем Enum в модели
+        modelBuilder.HasPostgresEnum<ACTION>("action");
+        modelBuilder.HasPostgresEnum<ENTITY_TYPE>("entity_type");
         
+        //Подключаем комфигурацию db
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
     }
 

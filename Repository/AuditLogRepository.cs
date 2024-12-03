@@ -21,7 +21,7 @@ public class AuditLogRepository : IAuditLogRepository
 
     public async Task<AuditLogs?> GetByIdAsync(Guid id, CancellationToken token)
     {
-        return await _context.AuditLog.SingleOrDefaultAsync(x => x.id == id, token);
+        return await _context.AuditLog.SingleOrDefaultAsync(x => x.Id == id, token);
     }
 
     public async Task<AuditLogs?> CreateAsync(AuditLogs boardsModel, CancellationToken token)
@@ -33,7 +33,7 @@ public class AuditLogRepository : IAuditLogRepository
 
     public async Task<AuditLogs?> DeleteAsync(Guid id, CancellationToken token)
     {
-        var audit = await _context.AuditLog.SingleOrDefaultAsync(x => x.id == id, token);
+        var audit = await _context.AuditLog.SingleOrDefaultAsync(x => x.Id == id, token);
         if (audit is null)
             return null;
         
@@ -44,6 +44,6 @@ public class AuditLogRepository : IAuditLogRepository
 
     public async Task<bool> ExistAsync(Guid id, CancellationToken token)
     {
-        return await _context.AuditLog.AnyAsync(x => x.id == id, token);
+        return await _context.AuditLog.AnyAsync(x => x.Id == id, token);
     }
 }

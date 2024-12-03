@@ -4,7 +4,7 @@ namespace WebApiTaskify.Models;
 
 public class OrgLimits : BaseModel
 {
-    public Guid id { get; set; }
-    public string? orgId { get; set; }
-    public int? count { get; set; }
+    public Guid Id { get; init; }
+    public string? OrgId { get; init; }
+    public int? Count { get; set; }
 }

@@ -18,9 +18,9 @@ public class OrganizationConfiguration : IEntityTypeConfiguration<Organizations>
         builder.Property(c => c.Phone).IsRequired(false).HasMaxLength(15).HasColumnName("phone");
         builder.Property(c => c.State).IsRequired(false).HasColumnName("state");
         builder.Property(c => c.Website).IsRequired(false).HasMaxLength(100).HasColumnName("website");
-        builder.Property(c => c.createdTime).IsRequired().HasColumnName("created_time");
-        builder.Property(c => c.lastModifyTime).IsRequired().HasColumnName("last_modify_time");
-        builder.Property(c => c.createdUser).IsRequired(false).HasColumnName("created_user");
-        builder.Property(c => c.lastModifyUser).IsRequired(false).HasColumnName("last_modify_user");
+        builder.Property(c => c.CreatedTime).IsRequired().HasColumnName("created_time");
+        builder.Property(c => c.LastModifyTime).IsRequired().HasColumnName("last_modify_time");
+        builder.Property(c => c.CreatedUser).IsRequired(false).HasColumnName("created_user");
+        builder.Property(c => c.LastModifyUser).IsRequired(false).HasColumnName("last_modify_user");
     }
 }

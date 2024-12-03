@@ -20,7 +20,7 @@ public class CardRepository : ICardRepository
 
     public async Task<Cards?> GetByIdAsync(Guid id, CancellationToken token)
     {
-        return await _context.Card.SingleOrDefaultAsync(x => x.id == id, token);
+        return await _context.Card.SingleOrDefaultAsync(x => x.Id == id, token);
     }
 
     public async Task<Cards?> CreateAsync(Cards cardModel, CancellationToken token)
@@ -36,14 +36,14 @@ public class CardRepository : ICardRepository
         if(checkCard is null)
             return null;
         
-        checkCard.title = cardModel.title;
-        checkCard.description = cardModel.description;
-        checkCard.order = cardModel.order;
-        checkCard.timer = cardModel.timer;
-        checkCard.timeStart = cardModel.timeStart;
-        checkCard.timeEnd = cardModel.timeEnd;
-        checkCard.ready = cardModel.ready;
-        checkCard.lastModifyTime = cardModel.lastModifyTime;
+        checkCard.Title = cardModel.Title;
+        checkCard.Description = cardModel.Description;
+        checkCard.Order = cardModel.Order;
+        checkCard.Timer = cardModel.Timer;
+        checkCard.TimeStart = cardModel.TimeStart;
+        checkCard.TimeEnd = cardModel.TimeEnd;
+        checkCard.Ready = cardModel.Ready;
+        checkCard.LastModifyTime = cardModel.LastModifyTime;
         await _context.SaveChangesAsync(token);
         return checkCard;
     }
@@ -60,6 +60,6 @@ public class CardRepository : ICardRepository
 
     public  Task<bool> ExistAsync(Guid id, CancellationToken token)
     {
-        return _context.Card.AnyAsync(x=>x.id == id, token);
+        return _context.Card.AnyAsync(x=>x.Id == id, token);
     }
 }

@@ -9,15 +9,15 @@ public static class ListMappers
     {
         return new ListDto
         {
-            Id = listModel.id,
-            BoardId = listModel.boardId,
-            Title = listModel.title,
-            Order = listModel.order,
-            Cards = listModel.Cards.Select(x => x?.ToCardDto()).ToList(),
-            createdTime = listModel.createdTime,
-            lastModifyTime = listModel.lastModifyTime,
-            createdUser = listModel.createdUser,
-            lastModifyUser = listModel.lastModifyUser, // TODO: сделать вот это везде
+            Id = listModel.Id,
+            BoardId = listModel.BoardId,
+            Title = listModel.Title!,
+            Order = listModel.Order,
+            Cards = listModel.Cards!.Select(x => x?.ToCardDto()).ToList(),
+            CreatedTime = listModel.CreatedTime,
+            LastModifyTime = listModel.LastModifyTime,
+            CreatedUser = listModel.CreatedUser,
+            LastModifyUser = listModel.LastModifyUser,
         };
     }
     
@@ -25,14 +25,14 @@ public static class ListMappers
     {
         return new ListDto
         {
-            Id = listModel.id,
-            BoardId = listModel.boardId,
-            Title = listModel.title,
-            Order = listModel.order,
-            createdTime = listModel.createdTime,
-            lastModifyTime = listModel.lastModifyTime,
-            createdUser = listModel.createdUser,
-            lastModifyUser = listModel.lastModifyUser, // TODO: сделать вот это везде
+            Id = listModel.Id,
+            BoardId = listModel.BoardId,
+            Title = listModel.Title,
+            Order = listModel.Order,
+            CreatedTime = listModel.CreatedTime,
+            LastModifyTime = listModel.LastModifyTime,
+            CreatedUser = listModel.CreatedUser,
+            LastModifyUser = listModel.LastModifyUser,
         };
     }
 
@@ -41,10 +41,10 @@ public static class ListMappers
     {
         return new Lists
         {
-            id = Guid.NewGuid(),
-            boardId = boardId,
-            title = createListModel.Title,
-            order = createListModel.Order,
+            Id = Guid.NewGuid(),
+            BoardId = boardId,
+            Title = createListModel.Title,
+            Order = createListModel.Order,
         };
     }
 
@@ -52,8 +52,8 @@ public static class ListMappers
     {
         return new Lists
         {
-            title = updateListModel.Title,
-            order = updateListModel.Order,
+            Title = updateListModel.Title,
+            Order = updateListModel.Order,
         };
     }
 }

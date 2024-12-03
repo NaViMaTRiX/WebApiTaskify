@@ -4,10 +4,10 @@ namespace WebApiTaskify.Models;
 
 public class OrgSubscriptions : BaseModel
 {
-    public Guid id { get; set; }
-    public string? orgId { get; set; }
-    public string? StripeCustomerId { get; set; }
-    public string? StripeSubscriptionId { get; set; }
-    public string? StripePriceId { get; set; }
-    public DateTime? StripeCurrentPeriodEnd { get; set; } = DateTime.UtcNow;
+    public Guid Id { get; init; }
+    public string? OrgId { get; init; }
+    public string? StripeCustomerId { get; init; }
+    public string? StripeSubscriptionId { get; init; }
+    public string? StripePriceId { get; init; }
+    public DateTime? StripeCurrentPeriodEnd { get; init; } = DateTime.UtcNow;
 }

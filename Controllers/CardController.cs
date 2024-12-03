@@ -49,7 +49,7 @@ public class CardController(ICardRepository cardRepository, IListRepository list
         if (card is null)
             return BadRequest("Failed to create card");
         
-        return CreatedAtAction(nameof(GetById), new { id = card.id }, card.ToCardDto());
+        return CreatedAtAction(nameof(GetById), new { id = card.Id }, card.ToCardDto());
     }
 
     [HttpPut("{id:guid}")]

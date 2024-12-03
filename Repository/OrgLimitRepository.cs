@@ -21,7 +21,7 @@ public class OrgLimitRepository : IOrgLimitRepository
 
     public async Task<OrgLimits?> GetByIdAsync(Guid id, CancellationToken token)
     {
-        return await _context.OrgLimit.SingleOrDefaultAsync(x =>x.id == id, token);
+        return await _context.OrgLimit.SingleOrDefaultAsync(x =>x.Id == id, token);
     }
 
     public async Task<OrgLimits?> CreateAsync(OrgLimits listModel, CancellationToken token)
@@ -38,8 +38,8 @@ public class OrgLimitRepository : IOrgLimitRepository
         if (orgLimit is null)
             return null;
         
-        orgLimit.count = listModel.count;
-        orgLimit.lastModifyTime = listModel.lastModifyTime;
+        orgLimit.Count = listModel.Count;
+        orgLimit.LastModifyTime = listModel.LastModifyTime;
         await _context.SaveChangesAsync(token);
         return orgLimit;
     }
@@ -57,6 +57,6 @@ public class OrgLimitRepository : IOrgLimitRepository
 
     public Task<bool> ExistAsync(Guid id, CancellationToken token)
     {
-        return _context.OrgLimit.AnyAsync(x => x.id == id, token);
+        return _context.OrgLimit.AnyAsync(x => x.Id == id, token);
     }
 }

@@ -5,16 +5,16 @@ namespace WebApiTaskify.Models;
 
 public class Cards : BaseModel
 {
-    public Guid id { get; set; }
-    public string? title { get; set; }
-    public int? order { get; set; }
-    public Guid? listId { get; init; }
-    public string? description { get; set; }
-    public bool? timer { get; set; } // таймер есть или нету
-    public bool? ready { get; set; } // непомню
-    public DateTime? timeStart { get; set; } 
-    public DateTime? timeEnd { get; set; }
-
+    public Guid Id { get; set; }
+    public string? Title { get; set; }
+    public int? Order { get; set; }
+    public Guid? ListId { get; init; }
+    public string? Description { get; set; }
+    public bool? Timer { get; set; } // таймер есть или нет
+    public bool? Ready { get; set; } // непомню
+    public DateTime? TimeStart { get; set; } 
+    public DateTime? TimeEnd { get; set; }
+    
     [JsonIgnore]
     public Lists? List { get; init; }
 }

@@ -40,7 +40,7 @@ public class OrgSubscriptionController : ControllerBase
         return Ok(orgSubscription.ToOrgSubscriptionDto());
     }
 
-    [HttpPost("{orgId}")]
+    [HttpPost("{OrgId}")]
     public async Task<IActionResult> Create([FromBody] CreateOrgSubscriptionDto createOrgSubscriptionDto, string orgId, CancellationToken token)
     {
         if (!ModelState.IsValid)
@@ -52,7 +52,7 @@ public class OrgSubscriptionController : ControllerBase
         if (result is null)
             return BadRequest("Failed to create orgSubscription");
         
-        return CreatedAtAction(nameof(GetById), new { id = result.id }, result.ToOrgSubscriptionDto());
+        return CreatedAtAction(nameof(GetById), new { id = result.Id }, result.ToOrgSubscriptionDto());
     }
     
     //[HttpPut("{id:guid}")]

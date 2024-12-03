@@ -16,7 +16,7 @@ public class ListRepository(AppDbContext context) : IListRepository
     {
         return await context.List
             .Include(x => x.Cards)
-            .FirstOrDefaultAsync(x => x.id == id, token);
+            .FirstOrDefaultAsync(x => x.Id == id, token);
     }
 
     public async Task<Lists?> CreateAsync(Lists listModel, CancellationToken token)
@@ -33,9 +33,9 @@ public class ListRepository(AppDbContext context) : IListRepository
         if (list is null) 
             return null;
         
-        list.title = listModel.title;
-        list.order = listModel.order;
-        list.lastModifyTime = listModel.lastModifyTime;
+        list.Title = listModel.Title;
+        list.Order = listModel.Order;
+        list.LastModifyTime = listModel.LastModifyTime;
         
         await context.SaveChangesAsync(token);
         
@@ -55,6 +55,6 @@ public class ListRepository(AppDbContext context) : IListRepository
 
     public async Task<bool> ExistAsync(Guid id, CancellationToken token)
     {
-        return await context.List.AnyAsync(x => x.id == id, token);
+        return await context.List.AnyAsync(x => x.Id == id, token);
     }
 }

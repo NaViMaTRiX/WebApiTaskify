@@ -4,14 +4,14 @@ namespace WebApiTaskify.Models;
 
 public class Boards : BaseModel
 {
-    public Guid id { get; set; }
-    public string? orgId { get; set; }
-    public string? title { get; set; } 
-    public string? imageId { get; set; } 
-    public string? imageThumbUrl { get; set; } 
-    public string? imageFullUrl { get; set; } 
-    public string? imageUserName { get; set; } 
-    public string? imageLinkHTML { get; set; }
+    public Guid Id { get; init; }
+    public string? OrgId { get; set; }
+    public string? Title { get; set; } 
+    public string? ImageId { get; set; } 
+    public string? ImageThumbUrl { get; set; } 
+    public string? ImageFullUrl { get; set; } 
+    public string? ImageUserName { get; set; } 
+    public string? ImageLinkHTML { get; set; }
     
-    public List<Lists>? Lists { get; set; }
+    public List<Lists>? Lists { get; init; }
 }

@@ -11,19 +11,19 @@ public static class AuditLogMappers
     {
         return new AuditLogDto
         {
-            Id = auditLog.id,
-            OrgId = auditLog.orgId,
-            UserId = auditLog.userId,
-            UserName = auditLog.userName,
-            UserImage = auditLog.userImage,
-            Action = auditLog.action,
-            EntityId = auditLog.entityId,
-            EntityTitle = auditLog.entityTitle,
-            EntityType = auditLog.entityType,
-            createdTime = auditLog.createdTime,
-            lastModifyTime = auditLog.lastModifyTime,
-            createdUser = auditLog.createdUser,
-            lastModifyUser = auditLog.lastModifyUser,
+            Id = auditLog.Id,
+            OrgId = auditLog.OrgId,
+            UserId = auditLog.UserId,
+            UserName = auditLog.UserName,
+            UserImage = auditLog.UserImage,
+            Action = auditLog.Action,
+            EntityId = auditLog.EntityId,
+            EntityTitle = auditLog.EntityTitle,
+            EntityType = auditLog.EntityType,
+            CreatedTime = auditLog.CreatedTime,
+            LastModifyTime = auditLog.LastModifyTime,
+            CreatedUser = auditLog.CreatedUser,
+            LastModifyUser = auditLog.LastModifyUser,
         };
     }
 
@@ -31,15 +31,15 @@ public static class AuditLogMappers
     {
         return new AuditLogs
         {
-            id = Guid.NewGuid(),
-            orgId = createAuditLog.OrgId,
-            userId = createAuditLog.UserId,
-            userName = createAuditLog.UserName,
-            userImage = createAuditLog.UserImage,
-            action = createAuditLog.Action,
-            entityId = createAuditLog.EntityId,
-            entityTitle = createAuditLog.EntityTitle,
-            entityType = createAuditLog.EntityType,
+            Id = Guid.NewGuid(),
+            OrgId = createAuditLog.OrgId,
+            UserId = createAuditLog.UserId,
+            UserName = createAuditLog.UserName,
+            UserImage = createAuditLog.UserImage,
+            Action = createAuditLog.Action,
+            EntityId = createAuditLog.EntityId,
+            EntityTitle = createAuditLog.EntityTitle,
+            EntityType = createAuditLog.EntityType,
         };
     }
 }

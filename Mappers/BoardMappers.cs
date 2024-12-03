@@ -9,19 +9,18 @@ public static class BoardMappers
     {
         return new BoardDto
         {
-            Id = boardModel.id,
-            OrgId = boardModel.orgId,
-            Title = boardModel.title,
-            Lists = boardModel.Lists.Select(list => list?.ToBoardWithListDto()).ToList(),
-            ImageId = boardModel.imageId,
-            ImageFullUrl = boardModel.imageFullUrl,
-            ImageUserName = boardModel.imageUserName,
-            ImageThumbUrl = boardModel.imageThumbUrl,
-            ImageLinkHtml = boardModel.imageLinkHTML,
-            createdTime = boardModel.createdTime,
-            lastModifyTime = boardModel.lastModifyTime,
-            lastModifyUser = boardModel.lastModifyUser,
-            createdUser = boardModel.createdUser,
+            Id = boardModel.Id,
+            OrgId = boardModel.OrgId,
+            Title = boardModel.Title,
+            Lists = boardModel.Lists!.Select(list => list?.ToBoardWithListDto()).ToList(),
+            ImageId = boardModel.ImageId,
+            ImageFullUrl = boardModel.ImageFullUrl,
+            ImageThumbUrl = boardModel.ImageThumbUrl,
+            ImageLinkHtml = boardModel.ImageLinkHTML,
+            CreatedTime = boardModel.CreatedTime,
+            LastModifyTime = boardModel.LastModifyTime,
+            LastModifyUser = boardModel.LastModifyUser,
+            CreatedUser = boardModel.CreatedUser,
         };
     }
 
@@ -29,14 +28,14 @@ public static class BoardMappers
     {
         return new Boards
         {
-            id = Guid.NewGuid(),
-            orgId = orgId,
-            title = createBoardModel.Title,
-            imageId = createBoardModel.ImageId,
-            imageFullUrl = createBoardModel.ImageFullUrl,
-            imageUserName = createBoardModel.ImageUserName,
-            imageThumbUrl = createBoardModel.ImageThumbUrl,
-            imageLinkHTML = createBoardModel.ImageLinkHtml,
+            Id = Guid.NewGuid(),
+            OrgId = orgId,
+            Title = createBoardModel.Title,
+            ImageId = createBoardModel.ImageId,
+            ImageFullUrl = createBoardModel.ImageFullUrl,
+            ImageUserName = createBoardModel.ImageUserName,
+            ImageThumbUrl = createBoardModel.ImageThumbUrl,
+            ImageLinkHTML = createBoardModel.ImageLinkHtml,
         };
     }
 
@@ -44,13 +43,13 @@ public static class BoardMappers
     {
         return new Boards
         {
-            orgId = updateBoardModel.OrgId,
-            title = updateBoardModel.Title,
-            imageId = updateBoardModel.ImageId,
-            imageFullUrl = updateBoardModel.ImageFullUrl,
-            imageUserName = updateBoardModel.ImageUserName,
-            imageThumbUrl = updateBoardModel.ImageThumbUrl,
-            imageLinkHTML = updateBoardModel.ImageLinkHtml,
+            OrgId = updateBoardModel.OrgId,
+            Title = updateBoardModel.Title,
+            ImageId = updateBoardModel.ImageId,
+            ImageFullUrl = updateBoardModel.ImageFullUrl,
+            ImageUserName = updateBoardModel.ImageUserName,
+            ImageThumbUrl = updateBoardModel.ImageThumbUrl,
+            ImageLinkHTML = updateBoardModel.ImageLinkHtml,
         };
     }
 }

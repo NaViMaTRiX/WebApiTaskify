@@ -40,7 +40,7 @@ public class OrgLimitController : ControllerBase
         return Ok(orgLimit.ToOrgLimitDto());
     }
 
-    [HttpPost("{orgId}")]
+    [HttpPost("{OrgId}")]
     public async Task<IActionResult> Create([FromBody] CreateOrgLimitDto createOrgLimitDto, string orgId, CancellationToken token)
     {
         if(!ModelState.IsValid)
@@ -51,7 +51,7 @@ public class OrgLimitController : ControllerBase
         
         if(orgLimit is null)
             return BadRequest("Organization count could not be created");
-        return CreatedAtAction(nameof(GetById), new {id = orgLimit.id}, orgLimit.ToOrgLimitDto());
+        return CreatedAtAction(nameof(GetById), new {id = orgLimit.Id}, orgLimit.ToOrgLimitDto());
     }
 
     [HttpPut("{id:guid}")]

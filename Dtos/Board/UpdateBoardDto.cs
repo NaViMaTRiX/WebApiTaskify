@@ -1,10 +1,13 @@
-﻿namespace WebApiTaskify.Dtos.Board;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace WebApiTaskify.Dtos.Board;
 
 using System.ComponentModel.DataAnnotations;
 
 public class UpdateBoardDto
 {
-    public string OrgId { get; set; }
+    [StringLength(100)]
+    public string OrgId { get; set; } = string.Empty;
     [Required]
     [MinLength(3)]
     [MaxLength(30)]

@@ -16,7 +16,7 @@ public class BoardRepository(AppDbContext context) : IBoardRepository
     {
          var board =  await context.Board
             .Include(x => x.Lists)
-            .FirstOrDefaultAsync(x => x.id == id, token);
+            .FirstOrDefaultAsync(x => x.Id == id, token);
          return board;
     }
 
@@ -27,7 +27,7 @@ public class BoardRepository(AppDbContext context) : IBoardRepository
 
     public async Task<Boards?> CreateAsync(string orgId, Boards boardModel, CancellationToken token)
     {
-        var objOrgId = await context.Board.SingleOrDefaultAsync(x => x.orgId == orgId, token);
+        var objOrgId = await context.Board.SingleOrDefaultAsync(x => x.OrgId == orgId, token);
         if (objOrgId is null)
             return null;
         
@@ -43,14 +43,14 @@ public class BoardRepository(AppDbContext context) : IBoardRepository
         if (board is null)
             return null;
         
-        board.orgId = boardModel.orgId;
-        board.title = boardModel.title;
-        board.imageId = boardModel.imageId;
-        board.imageThumbUrl = boardModel.imageThumbUrl;
-        board.imageFullUrl = boardModel.imageFullUrl;
-        board.imageUserName = boardModel.imageUserName;
-        board.imageLinkHTML = boardModel.imageLinkHTML;
-        board.lastModifyTime = boardModel.lastModifyTime;
+        board.OrgId = boardModel.OrgId;
+        board.Title = boardModel.Title;
+        board.ImageId = boardModel.ImageId;
+        board.ImageThumbUrl = boardModel.ImageThumbUrl;
+        board.ImageFullUrl = boardModel.ImageFullUrl;
+        board.ImageUserName = boardModel.ImageUserName;
+        board.ImageLinkHTML = boardModel.ImageLinkHTML;
+        board.LastModifyTime = boardModel.LastModifyTime;
         
         await context.SaveChangesAsync();
         return board;
@@ -70,6 +70,6 @@ public class BoardRepository(AppDbContext context) : IBoardRepository
 
     public Task<bool> ExistAsync(Guid id, CancellationToken token)
     {
-        return context.Board.AnyAsync(x => x.id == id, token);
+        return context.Board.AnyAsync(x => x.Id == id, token);
     }
 }

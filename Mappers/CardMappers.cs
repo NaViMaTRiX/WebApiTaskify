@@ -9,19 +9,19 @@ public static class CardMappers
     {
         return new CardDto
         {
-            id = cardDto.id,
-            listId = cardDto.listId,
-            title = cardDto.title,
-            description = cardDto.description,
-            order = cardDto.order,
-            readyChecked = cardDto.ready,
-            timeStart = cardDto.timeStart,
-            timeEnd = cardDto.timeEnd,
-            timeChecked = cardDto.timer,
-            createdTime = cardDto.createdTime,
-            lastModifyTime = cardDto.lastModifyTime,
-            lastModifyUser = cardDto.lastModifyUser,
-            createdUser = cardDto.createdUser,
+            id = cardDto.Id,
+            listId = cardDto.ListId,
+            title = cardDto.Title,
+            description = cardDto.Description,
+            order = cardDto.Order,
+            readyChecked = cardDto.Ready,
+            timeStart = cardDto.TimeStart,
+            timeEnd = cardDto.TimeEnd,
+            timeChecked = cardDto.Timer,
+            CreatedTime = cardDto.CreatedTime,
+            LastModifyTime = cardDto.LastModifyTime,
+            LastModifyUser = cardDto.LastModifyUser,
+            CreatedUser = cardDto.CreatedUser,
         };
     }
 
@@ -29,15 +29,15 @@ public static class CardMappers
     {
         return new Cards
         {
-            id = Guid.NewGuid(),
-            listId = listId,
-            title = createCardDto.Title,
-            description = createCardDto.Description,
-            order = createCardDto.Order,
-            timer = createCardDto.TimeChecked,
-            ready = createCardDto.ReadyChecked,
-            timeStart = createCardDto.TimeStart,
-            timeEnd = createCardDto.TimeEnd,
+            Id = Guid.NewGuid(),
+            ListId = listId,
+            Title = createCardDto.Title,
+            Description = createCardDto.Description,
+            Order = createCardDto.Order,
+            Timer = createCardDto.TimeChecked,
+            Ready = createCardDto.ReadyChecked,
+            TimeStart = createCardDto.TimeStart,
+            TimeEnd = createCardDto.TimeEnd,
         };
     }
 
@@ -45,13 +45,13 @@ public static class CardMappers
     {
         return new Cards
         {
-            title = updateCardDto.Title,
-            description = updateCardDto.Description,
-            order = updateCardDto.Order,
-            ready = updateCardDto.ReadyChecked,
-            timer = updateCardDto.TimeChecked,
-            timeStart = updateCardDto.TimeStart,
-            timeEnd = updateCardDto.TimeEnd,
+            Title = updateCardDto.Title,
+            Description = updateCardDto.Description,
+            Order = updateCardDto.Order,
+            Ready = updateCardDto.ReadyChecked,
+            Timer = updateCardDto.TimeChecked,
+            TimeStart = updateCardDto.TimeStart,
+            TimeEnd = updateCardDto.TimeEnd,
         };
     }
 }

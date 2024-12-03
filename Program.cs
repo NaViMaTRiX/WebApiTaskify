@@ -27,8 +27,6 @@ builder.Services.AddApiVersioning(options =>
         options.SubstituteApiVersionInUrl = true;
     });
 
-NpgsqlConnection.GlobalTypeMapper.MapEnum<ACTION>("action");
-NpgsqlConnection.GlobalTypeMapper.MapEnum<ENTITY_TYPE>("entity_type");
 
 builder.Services.AddDbContext<AppDbContext>();
 

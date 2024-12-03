@@ -33,13 +33,13 @@ public class BoardController(IBoardRepository boardRepository) : ControllerBase
         return Ok(board.ToBoardDto());
     }
 
-    [HttpPost("{orgId}")]
+    [HttpPost("{OrgId}")]
     public async Task<IActionResult> Create([FromRoute] string orgId, [FromBody] CreateBoardDto boardDto, CancellationToken token)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         
-        // TODO: проверка orgId через станонный сервис. Получается нужно получать orgId из контроллера другого api.
+        // TODO: проверка OrgId через станонный сервис. Получается нужно получать OrgId из контроллера другого api.
         
         var boardModel = boardDto.ToBoardFromCreate(orgId);
         var board = await boardRepository.CreateAsync(orgId, boardModel, token);
@@ -47,7 +47,7 @@ public class BoardController(IBoardRepository boardRepository) : ControllerBase
         if (board is null)
             return BadRequest("Failed to create board");
         
-        return CreatedAtAction(nameof(GetById), new { id = board.id }, board.ToBoardDto());
+        return CreatedAtAction(nameof(GetById), new { id = board.Id }, board.ToBoardDto());
     }
 
     [HttpPut("{id:guid}")]

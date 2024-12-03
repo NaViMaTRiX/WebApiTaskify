@@ -45,7 +45,7 @@ public class AuditLogController(IAuditLogRepository auditLogRepository) : Contro
         if (auditLog == null)
             return BadRequest("Failed to create audit log");
         
-        return CreatedAtAction(nameof(GetById), new { id = auditLog.id }, auditLog.ToAuditLogDto());
+        return CreatedAtAction(nameof(GetById), new { id = auditLog.Id }, auditLog.ToAuditLogDto());
     }
 
     [HttpDelete("{id:guid}")]

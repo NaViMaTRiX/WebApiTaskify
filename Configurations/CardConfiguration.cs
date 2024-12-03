@@ -8,23 +8,24 @@ public class CardConfiguration : IEntityTypeConfiguration<Cards>
 {
     public void Configure(EntityTypeBuilder<Cards> builder)
     {
-        builder.ToTable("cards").HasKey(c => c.id);
-        builder.Property(c => c.id).IsRequired();
-        builder.Property(c => c.title).HasMaxLength(100).IsRequired(false);
-        builder.Property(c => c.description).HasMaxLength(3000).IsRequired(false);
-        builder.Property(c => c.timeStart).IsRequired(false).HasColumnName("time_start");
-        builder.Property(c => c.timeEnd).IsRequired(false).HasColumnName("time_end");
-        builder.Property(c => c.listId).IsRequired(false).HasColumnName("list_id");
-        builder.Property(c => c.order).IsRequired(false);
-        builder.Property(c => c.ready).IsRequired(false);
-        builder.Property(c => c.createdTime).IsRequired().HasColumnName("created_time");
-        builder.Property(c => c.lastModifyTime).IsRequired().HasColumnName("last_modify_time");
-        builder.Property(c => c.createdUser).IsRequired(false).HasColumnName("created_user");
-        builder.Property(c => c.lastModifyUser).IsRequired(false).HasColumnName("last_modify_user");
+        builder.ToTable("cards").HasKey(c => c.Id);
+        builder.Property(c => c.Id).IsRequired().HasColumnName("id");
+        builder.Property(c => c.Title).HasMaxLength(100).IsRequired(false).HasColumnName("title");
+        builder.Property(c => c.Description).HasMaxLength(3000).IsRequired(false).HasColumnName("description");
+        builder.Property(c => c.TimeStart).IsRequired(false).HasColumnName("time_start");
+        builder.Property(c => c.TimeEnd).IsRequired(false).HasColumnName("time_end");
+        builder.Property(c => c.ListId).IsRequired(false).HasColumnName("list_id");
+        builder.Property(c => c.Order).IsRequired(false).HasColumnName("order");
+        builder.Property(c => c.Timer).IsRequired(false).HasColumnName("timer");
+        builder.Property(c => c.Ready).IsRequired(false).HasColumnName("ready");
+        builder.Property(c => c.CreatedTime).IsRequired().HasColumnName("created_time");
+        builder.Property(c => c.LastModifyTime).IsRequired().HasColumnName("last_modify_time");
+        builder.Property(c => c.CreatedUser).IsRequired(false).HasColumnName("created_user");
+        builder.Property(c => c.LastModifyUser).IsRequired(false).HasColumnName("last_modify_user");
         
         builder.HasOne(c => c.List)
             .WithMany(l => l.Cards)
-            .HasForeignKey("listId") // Теневое свойство (не существует в модели)
+            .HasForeignKey("ListId") // Теневое свойство (не существует в модели)
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

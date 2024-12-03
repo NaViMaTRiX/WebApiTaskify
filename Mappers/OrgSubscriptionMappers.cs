@@ -9,16 +9,16 @@ public static class OrgSubscriptionMappers
     {
         return new OrgSubscriptionDto
         {
-            Id = orgSubscription.id,
-            OrgId = orgSubscription.orgId,
+            Id = orgSubscription.Id,
+            OrgId = orgSubscription.OrgId,
             StripePriseId = orgSubscription.StripePriceId,
             StripeCustomerId = orgSubscription.StripeCustomerId,
             StripeSubscriptionId = orgSubscription.StripeSubscriptionId,
             StripeCurrentPeriodEnd = orgSubscription.StripeCurrentPeriodEnd,
-            createdUser = orgSubscription.createdUser,
-            lastModifyUser = orgSubscription.lastModifyUser,
-            createdTime = orgSubscription.createdTime,
-            lastModifyTime = orgSubscription.lastModifyTime,
+            CreatedUser = orgSubscription.CreatedUser,
+            LastModifyUser = orgSubscription.LastModifyUser,
+            CreatedTime = orgSubscription.CreatedTime,
+            LastModifyTime = orgSubscription.LastModifyTime,
         };
     }
 
@@ -26,8 +26,8 @@ public static class OrgSubscriptionMappers
     {
         return new OrgSubscriptions
         {
-            id = Guid.NewGuid(),
-            orgId = orgId,
+            Id = Guid.NewGuid(),
+            OrgId = orgId,
             StripePriceId = createOrgSubscription.StripePriseId,
             StripeCustomerId = createOrgSubscription.StripeCustomerId,
             StripeSubscriptionId = createOrgSubscription.StripeSubscriptionId,
